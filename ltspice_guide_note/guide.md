@@ -12,7 +12,7 @@
 ### Step 1
 
 | Step 1.1 : Open LTspice  | <video width="500 px" controls src="../ltspice_gui_images_and_videos/1.mp4"></video> | 
-| --- |  --- |
+| --- |  :--- |
 | Step 1.2 : Initial Window | ![](../ltspice_gui_images_and_videos/1.png) |
 
 
@@ -21,13 +21,13 @@
 ### Step 2
 
 | Step 2.1 : MenuBar - Before Schematics | ![MenuBar](../ltspice_gui_images_and_videos/menu/before_sch.png) | 
-| --- |  --- |
+| --- |  :--- |
 | Step 2.2 : MenuBar - After New Schematics | ![MenuBar](../ltspice_gui_images_and_videos/menu/menu.png) |
 | Step 2.3 : Menu - Individual MenuItem  | <video controls src="../ltspice_gui_images_and_videos/menu/menu.mp4"></video>|
 
   
 | Menu | Image | Video |
-| ---  | ---  | --- |  
+| ---  | :---  | :--- |  
 | File | ![file](../ltspice_gui_images_and_videos/menu/file.png) |<video width="500 px" controls src="../ltspice_gui_images_and_videos/menu/file.mp4"></video>|
 | Edit | ![edit](../ltspice_gui_images_and_videos/menu/edit_.png) |<video width="500 px" controls src="../ltspice_gui_images_and_videos/menu/edit.mp4"></video>|
 | Hierarchy |  ![Hierarchy](../ltspice_gui_images_and_videos/menu/hierarchy.png) |<video width="500 px" controls src="../ltspice_gui_images_and_videos/menu/hierarchy.mp4"></video>|
@@ -44,5 +44,8 @@
 |Step 3.1 : Toolbar |  ![Toolbar](../ltspice_gui_images_and_videos/toolbar/toolbar%20and%20menubar.png) | 
 | --- | --- |
 | Step 3.2 : Toolbar - Individual Component  | <video controls src="../ltspice_gui_images_and_videos/toolbar/toolbar.mp4"></video> |
+
+---
+
 
 
