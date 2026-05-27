@@ -22,7 +22,8 @@
 | ![Menu](../ltspice_gui_images_and_videos/menu/before_sch.png) | ![Menu](../ltspice_gui_images_and_videos/menu/menu.png)| 
 
 #### Step 2.3 : Menu - Individual MenuItem  
-<video controls src="../ltspice_gui_images_and_videos/toolbar/menu.mp4"></video>
+
+<video controls src="../ltspice_gui_images_and_videos/menu/menu.mp4"></video>
 
 
 ### Step 3
