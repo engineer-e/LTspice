@@ -11,9 +11,14 @@
 
 ### Step 1
 
-|Step 1.1 : Open LTspice | Step 1.2 : Initial Window |
-| --- | --- |
-| <video width = "500 px" controls src="../ltspice_gui_images_and_videos/1.mp4"></video> | ![](../ltspice_gui_images_and_videos/1.png) |
+#### Step 1.1 : Open LTspice
+
+<video controls src="../ltspice_gui_images_and_videos/1.mp4"></video>
+
+
+#### Step 1.2 : Initial Window
+
+![](../ltspice_gui_images_and_videos/1.png)
 
 ### Step 2
 
