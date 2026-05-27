@@ -57,31 +57,34 @@
 | 6| A | Configure Analysis | ![Configure](../ltspice_gui_images_and_videos/toolbar/toolbar%20component/configure%20analysis.png) | | |
 | 7| Alt + R | Run/Pause Simulation | ![run](../ltspice_gui_images_and_videos/toolbar/toolbar%20component/run.png) | | |
 | 8| Alt + S | Stop Simulation | ![stop](../ltspice_gui_images_and_videos/toolbar/toolbar%20component/stop.png) | | |
-| 9| Z | Zoom to rectangle | ![Zoom to rectange](../ltspice_gui_images_and_videos/toolbar/toolbar%20component/Zoom%20to%20rectangle.png) | | |
-| 10| Shift + Z | Zoom back | ![Zoom to rectange](../ltspice_gui_images_and_videos/toolbar/toolbar%20component/Zoom%20back.png) | | |
-| 11| Space | Zoom to Fit | ![Zoom to rectange](../ltspice_gui_images_and_videos/toolbar/toolbar%20component/Zoom%20to%20fit.png) | | |
-| 12| Ctrl + Y | Autorange | ![Autorange](../ltspice_gui_images_and_videos/toolbar/toolbar%20component/Vertically%20Autorange.png) | | |
-| 13|  | Pick Visibles Traces | ![Pick Visible Traces](../ltspice_gui_images_and_videos/toolbar/toolbar%20component/pick%20visible%20traces.png) | | |
-| 14| W | Wire | ![](../ltspice_gui_images_and_videos/toolbar/toolbar%20component/wire.png) | | |
-| 15| G | Ground | ![](../ltspice_gui_images_and_videos/toolbar/toolbar%20component/ground.png) | | |
-| 16| V | Voltage Source | ![](../ltspice_gui_images_and_videos/toolbar/toolbar%20component/voltage%20source.png) | | |
-| 17| R | Resistor  | ![](../ltspice_gui_images_and_videos/toolbar/toolbar%20component/Resistor.png) | | |
-| 18| C | Capacitor | ![](../ltspice_gui_images_and_videos/toolbar/toolbar%20component/Capacitor.png) | | |
-| 19| L | Inductor | ![](../ltspice_gui_images_and_videos/toolbar/toolbar%20component/Inductor.png) | | |
-| 20| D | Diode | ![](../ltspice_gui_images_and_videos/toolbar/toolbar%20component/diode.png) | | |
-| 21| P | Component | ![](../ltspice_gui_images_and_videos/toolbar/toolbar%20component/Component.png) | | |
-| 22| N | Label Net | ![](../ltspice_gui_images_and_videos/toolbar/toolbar%20component/Label%20Net.png) | | |
-| 23| T | Text | ![](../ltspice_gui_images_and_videos/toolbar/toolbar%20component/text.png) | | |
-| 24| .  | SPICE Derivative | ![](../ltspice_gui_images_and_videos/toolbar/toolbar%20component/Spice%20Derivative.png) | | |
-| 25| Backspace or Del | Delete Mode  | ![](../ltspice_gui_images_and_videos/toolbar/toolbar%20component/delete%20mode.png) | | |
-| 26| Ctrl + C |  Duplicate Mode | ![](../ltspice_gui_images_and_videos/toolbar/toolbar%20component/Duplicate%20Mode.png) | | |
-| 27| Ctrl + M | Move Mode | ![](../ltspice_gui_images_and_videos/toolbar/toolbar%20component/Move%20Mode.png) | | |
-| 28 | Ctrl + S  | Stretch Mode  | ![](../ltspice_gui_images_and_videos/toolbar/toolbar%20component/Stretch%20Mode.png) | | |
-| 29 | Ctrl + R  | Rotate  | ![](../ltspice_gui_images_and_videos/toolbar/toolbar%20component/rotate.png) | | |
-| 30 | Ctrl + E | Mirror  | ![](../ltspice_gui_images_and_videos/toolbar/toolbar%20component/mirror.png) | | |
-| 31 | Ctrl + Z   | Undo  | ![](../ltspice_gui_images_and_videos/toolbar/toolbar%20component/undo.png) | | |
-| 32 | Ctrl + Shift + Z | Redo | ![](../ltspice_gui_images_and_videos/toolbar/toolbar%20component/redo.png) | | |
-| 33 | Ctrl + F | Search | ![](../ltspice_gui_images_and_videos/toolbar/toolbar%20component/search.png) | | |
+| 9|  | Tile Windows Vertically  | ![Tile Windows Vertically ](../ltspice_gui_images_and_videos/toolbar/toolbar%20component/tile%20windows%20vertically.png) | | |
+| 10|  | Tile Windows Horizontally | ![Tile Windows Horizontally](../ltspice_gui_images_and_videos/toolbar/toolbar%20component/tile%20windows%20horizontally.png) | | |
+| 11|  | Cascade Windows | ![Cascade Windows](../ltspice_gui_images_and_videos/toolbar/toolbar%20component/cascade%20window.png) | | |
+| 12| Z | Zoom to rectangle | ![Zoom to rectange](../ltspice_gui_images_and_videos/toolbar/toolbar%20component/Zoom%20to%20rectangle.png) | | |
+| 13| Shift + Z | Zoom back | ![Zoom to rectange](../ltspice_gui_images_and_videos/toolbar/toolbar%20component/Zoom%20back.png) | | |
+| 14| Space | Zoom to Fit | ![Zoom to rectange](../ltspice_gui_images_and_videos/toolbar/toolbar%20component/Zoom%20to%20fit.png) | | |
+| 15| Ctrl + Y | Autorange | ![Autorange](../ltspice_gui_images_and_videos/toolbar/toolbar%20component/Vertically%20Autorange.png) | | |
+| 16|  | Pick Visibles Traces | ![Pick Visible Traces](../ltspice_gui_images_and_videos/toolbar/toolbar%20component/pick%20visible%20traces.png) | | |
+| 17| W | Wire | ![](../ltspice_gui_images_and_videos/toolbar/toolbar%20component/wire.png) | | |
+| 18| G | Ground | ![](../ltspice_gui_images_and_videos/toolbar/toolbar%20component/ground.png) | | |
+| 19| V | Voltage Source | ![](../ltspice_gui_images_and_videos/toolbar/toolbar%20component/voltage%20source.png) | | |
+| 20| R | Resistor  | ![](../ltspice_gui_images_and_videos/toolbar/toolbar%20component/Resistor.png) | | |
+| 21| C | Capacitor | ![](../ltspice_gui_images_and_videos/toolbar/toolbar%20component/Capacitor.png) | | |
+| 22| L | Inductor | ![](../ltspice_gui_images_and_videos/toolbar/toolbar%20component/Inductor.png) | | |
+| 23| D | Diode | ![](../ltspice_gui_images_and_videos/toolbar/toolbar%20component/diode.png) | | |
+| 24| P | Component | ![](../ltspice_gui_images_and_videos/toolbar/toolbar%20component/Component.png) | | |
+| 25| N | Label Net | ![](../ltspice_gui_images_and_videos/toolbar/toolbar%20component/Label%20Net.png) | | |
+| 26| T | Text | ![](../ltspice_gui_images_and_videos/toolbar/toolbar%20component/text.png) | | |
+| 27| .  | SPICE Derivative | ![](../ltspice_gui_images_and_videos/toolbar/toolbar%20component/Spice%20Derivative.png) | | |
+| 28| Backspace or Del | Delete Mode  | ![](../ltspice_gui_images_and_videos/toolbar/toolbar%20component/delete%20mode.png) | | |
+| 29| Ctrl + C |  Duplicate Mode | ![](../ltspice_gui_images_and_videos/toolbar/toolbar%20component/Duplicate%20Mode.png) | | |
+| 30| Ctrl + M | Move Mode | ![](../ltspice_gui_images_and_videos/toolbar/toolbar%20component/Move%20Mode.png) | | |
+| 31 | Ctrl + S  | Stretch Mode  | ![](../ltspice_gui_images_and_videos/toolbar/toolbar%20component/Stretch%20Mode.png) | | |
+| 32 | Ctrl + R  | Rotate  | ![](../ltspice_gui_images_and_videos/toolbar/toolbar%20component/rotate.png) | | |
+| 33 | Ctrl + E | Mirror  | ![](../ltspice_gui_images_and_videos/toolbar/toolbar%20component/mirror.png) | | |
+| 34 | Ctrl + Z   | Undo  | ![](../ltspice_gui_images_and_videos/toolbar/toolbar%20component/undo.png) | | |
+| 35 | Ctrl + Shift + Z | Redo | ![](../ltspice_gui_images_and_videos/toolbar/toolbar%20component/redo.png) | | |
+| 36 | Ctrl + F | Search | ![](../ltspice_gui_images_and_videos/toolbar/toolbar%20component/search.png) | | |
 
 
 ---
