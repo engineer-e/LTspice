@@ -29,6 +29,9 @@
 
 <video controls src="../ltspice_gui_images_and_videos/menu/menu.mp4"></video>
 
+| File | Edit | Hierarchy | View | Simulate | Tools | Window | Help |
+| ---  | ---  | ---       | ---  | ---      | ---   |  ---   | ---  |
+| ![file](../ltspice_gui_images_and_videos/menu/file.png) | ![edit](../ltspice_gui_images_and_videos/menu/edit_.png) | ![edit](../ltspice_gui_images_and_videos/menu/hierarchy.png) | ![edit](../ltspice_gui_images_and_videos/menu/view.png) | ![edit](../ltspice_gui_images_and_videos/menu/simulate.png) | ![edit](../ltspice_gui_images_and_videos/menu/simulate.png) | ![window](../ltspice_gui_images_and_videos/menu/window.png) | ![edit](../ltspice_gui_images_and_videos/menu/help.png) |
 
 ### Step 3
 
