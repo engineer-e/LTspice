@@ -11,27 +11,32 @@
 
 ### Step 1
 
-#### Step 1.1 : Open LTspice
-
-<video controls src="../ltspice_gui_images_and_videos/1.mp4"></video>
-
-#### Step 1.2 : Initial Window
-
-![](../ltspice_gui_images_and_videos/1.png)
+| Step 1.1 : Open LTspice | Step 1.2 : Initial Window |
+| --- | --- |
+| <video width="540 px" controls src="../ltspice_gui_images_and_videos/1.mp4"></video> |  ![](../ltspice_gui_images_and_videos/1.png) |
 
 ### Step 2
 
-|Step 2.1 : Menu - Before Schematics | Step 2.2 : Menu - After New Schematics |
+|Step 2.1 : MenuBar - Before Schematics | Step 2.2 : MenuBar - After New Schematics |
 | --- |  --- |
-| ![Menu](../ltspice_gui_images_and_videos/menu/before_sch.png) | ![Menu](../ltspice_gui_images_and_videos/menu/menu.png)| 
+| ![MenuBar](../ltspice_gui_images_and_videos/menu/before_sch.png) | ![MenuBar](../ltspice_gui_images_and_videos/menu/menu.png)| 
 
 #### Step 2.3 : Menu - Individual MenuItem  
 
 <video controls src="../ltspice_gui_images_and_videos/menu/menu.mp4"></video>
 
-| File | Edit | Hierarchy | View | Simulate | Tools | Window | Help |
-| ---  | ---  | ---       | ---  | ---      | ---   |  ---   | ---  |
-| ![file](../ltspice_gui_images_and_videos/menu/file.png) | ![edit](../ltspice_gui_images_and_videos/menu/edit_.png) | ![edit](../ltspice_gui_images_and_videos/menu/hierarchy.png) | ![edit](../ltspice_gui_images_and_videos/menu/view.png) | ![edit](../ltspice_gui_images_and_videos/menu/simulate.png) | ![edit](../ltspice_gui_images_and_videos/menu/simulate.png) | ![window](../ltspice_gui_images_and_videos/menu/window.png) | ![edit](../ltspice_gui_images_and_videos/menu/help.png) |
+| Menu | Image | Video |
+| ---  | ---  | --- |  
+| File | ![file](../ltspice_gui_images_and_videos/menu/file.png) |<video controls src="../ltspice_gui_images_and_videos/menu/file.mp4"></video>|
+| Edit | ![edit](../ltspice_gui_images_and_videos/menu/edit_.png) |<video controls src="../ltspice_gui_images_and_videos/menu/edit.mp4"></video>|
+| Hierarchy |  ![Hierarchy](../ltspice_gui_images_and_videos/menu/hierarchy.png) |<video controls src="../ltspice_gui_images_and_videos/menu/hierarchy.mp4"></video>|
+| View | ![View](../ltspice_gui_images_and_videos/menu/hierarchy.png)|<video controls src="../ltspice_gui_images_and_videos/menu/view.mp4"></video>|
+| Simulate| ![Simulate](../ltspice_gui_images_and_videos/menu/simulate.png)|<video controls src="../ltspice_gui_images_and_videos/menu/simulate.mp4"></video>|
+| Tools |![Tools](../ltspice_gui_images_and_videos/menu/tools.png)|<video controls src="../ltspice_gui_images_and_videos/menu/tools.mp4"></video>|
+| Window |![Window](../ltspice_gui_images_and_videos/menu/window.png)|<video controls src="../ltspice_gui_images_and_videos/menu/window.mp4"></video>|
+| Help |![Help](../ltspice_gui_images_and_videos/menu/help.png) |<video controls src="../ltspice_gui_images_and_videos/menu/help.mp4"></video>|
+
+
 
 ### Step 3
 
