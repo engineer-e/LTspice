@@ -31,7 +31,7 @@
 | File | ![file](../ltspice_gui_images_and_videos/menu/file.png) |<video width="500 px" controls src="../ltspice_gui_images_and_videos/menu/file.mp4"></video>|
 | Edit | ![edit](../ltspice_gui_images_and_videos/menu/edit_.png) |<video width="500 px" controls src="../ltspice_gui_images_and_videos/menu/edit.mp4"></video>|
 | Hierarchy |  ![Hierarchy](../ltspice_gui_images_and_videos/menu/hierarchy.png) |<video width="500 px" controls src="../ltspice_gui_images_and_videos/menu/hierarchy.mp4"></video>|
-| View | ![View](../ltspice_gui_images_and_videos/menu/hierarchy.png)|<video width="500 px" controls src="../ltspice_gui_images_and_videos/menu/view.mp4"></video>|
+| View | ![View](../ltspice_gui_images_and_videos/menu/view.png)|<video width="500 px" controls src="../ltspice_gui_images_and_videos/menu/view.mp4"></video>|
 | Simulate| ![Simulate](../ltspice_gui_images_and_videos/menu/simulate.png)|<video width="500 px" controls src="../ltspice_gui_images_and_videos/menu/simulate.mp4"></video>|
 | Tools |![Tools](../ltspice_gui_images_and_videos/menu/tools.png)|<video width="500 px" controls src="../ltspice_gui_images_and_videos/menu/tools.mp4"></video>|
 | Window |![Window](../ltspice_gui_images_and_videos/menu/window.png)|<video width="500 px" controls src="../ltspice_gui_images_and_videos/menu/window.mp4"></video>|
