@@ -1,0 +1,19 @@
+*
+R1 N001 N002 680
+R2 N001 N005 320
+R3 N006 0 250
+R4 N005 0 320
+Q1 N002 N004 N006 0 NPN
+C1 N007 N006 4.7µ V=50 Irms=0 Rser=0 Lser=0 mfg="Murata" pn="GRM31CR71H475KA12" type="X7R"
+C2 N008 N007 0.01µ
+C3 0 N008 150µ
+R5 N007 0 250
+R6 N008 0 250
+C4 N004 N003 0.01µ
+V1 N001 N003 SINE(5 5 50 0.1 0.166 23 100)
+.model NPN NPN
+.model PNP PNP
+.lib C:\Users\Hulk\AppData\Local\LTspice\lib\cmp\standard.bjt
+.tran 0.5
+.backanno
+.end

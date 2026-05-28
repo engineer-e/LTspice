@@ -1,0 +1,15 @@
+LTspice 26.0.2 for Windows
+Circuit: E:\End of 2026 May 25\ltspice\Ltspice_github\LTspice\ltspice_guide_note\osc.net
+Start Time: Thu May 28 12:11:53 2026
+solver = Normal
+Maximum thread count: 4
+tnom = 27
+temp = 27
+method = trap
+Direct Newton iteration succeeded in finding operating point.
+Total elapsed time: 0.154 seconds.
+
+Files loaded:
+E:\End of 2026 May 25\ltspice\Ltspice_github\LTspice\ltspice_guide_note\osc.net
+C:\Users\Hulk\AppData\Local\LTspice\lib\cmp\standard.bjt
+
