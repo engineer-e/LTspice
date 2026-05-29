@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Semiconductor Atomic Structure & Doping Simulator</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    .code-font {
+      font-family: 'Fira Code', monospace;
+    }
+    /* Custom scrollbar */
+    }
+    /* Pulsing animations */
+    @keyframes pulse-slow {
+      0%, 100% { opacity: 0.8; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.05); }
+    }
+    .pulse-glow {
+      animation: pulse-slow 3s infinite ease-in-out;
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col overflow-x-hidden">
+
+  <!-- Header -->
+  <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur-md sticky top-0 z-50 px-4 py-3 sm:px-6">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="h-10 w-10 rounded-lg bg-gradient-to-tr from-cyan-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-cyan-500/20">
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+          </svg>
+        </div>
+        <div>
+          <h1 class="text-lg sm:text-xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-indigo-300 to-amber-400">
+            SEMICONDUCTOR PHYSICS SIMULATOR
+          </h1>
+          <p class="text-xs text-slate-400">Atomic Structures, Bohr Models & Crystal Lattice Doping Sandbox</p>
+        </div>
+      </div>
+
+      <!-- Mode Selector -->
+      <div class="flex bg-slate-950 p-1 rounded-xl border border-slate-800">
+        <button id="tab-bohr" onclick="switchTab('bohr')" class="px-4 py-1.5 rounded-lg text-sm font-semibold transition-all duration-200 bg-cyan-600 text-white shadow-md">
+          Bohr Atomic Models
+        </button>
+        <button id="tab-lattice" onclick="switchTab('lattice')" class="px-4 py-1.5 rounded-lg text-sm font-semibold text-slate-400 hover:text-slate-200 transition-all duration-200">
+          2D Doping Lattice Sandbox
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Toast Notification System -->
+  <div id="toast" class="fixed bottom-4 right-4 z-50 bg-slate-900 border border-slate-700 text-slate-200 px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+    <div id="toast-icon" class="text-cyan-400">💡</div>
+    <div id="toast-msg" class="text-sm font-medium"></div>
+  </div>
+
+  <main class="flex-grow max-w-7xl w-full mx-auto p-4 sm:p-6 flex flex-col gap-6">
+    
+    <!-- ================= TAB 1: BOHR ATOMIC MODEL EXPLORER ================= -->
+    <div id="view-bohr" class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      
+      <!-- Controls & Selection Menu (Left/Top) -->
+      <div class="lg:col-span-4 flex flex-col gap-4">
+        <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-5 backdrop-blur-sm shadow-xl">
+          <h2 class="text-lg font-bold mb-4 text-slate-200 flex items-center gap-2">
+            <span class="text-cyan-400">⚛️</span> Select Element
+          </h2>
+          <div class="grid grid-cols-2 gap-3 mb-6">
+            <!-- Silicon (Intrinsic) -->
+            <button onclick="selectElement('Si')" id="btn-Si" class="element-btn p-3 rounded-xl border transition-all duration-200 text-left bg-slate-800/40 border-cyan-500/40 text-cyan-400 shadow-md ring-1 ring-cyan-500/30">
+              <span class="block text-xs font-bold text-cyan-400/70">Si (Z=14)</span>
+              <span class="text-base font-extrabold block">Silicon</span>
+              <span class="text-[10px] mt-1 inline-block bg-cyan-950 text-cyan-400 px-1.5 py-0.5 rounded font-mono font-bold">Intrinsic</span>
+            </button>
+            
+            <!-- Germanium (Intrinsic) -->
+            <button onclick="selectElement('Ge')" id="btn-Ge" class="element-btn p-3 rounded-xl border border-slate-800 bg-slate-900/40 hover:bg-slate-800/20 text-slate-400 transition-all duration-200 text-left">
+              <span class="block text-xs font-bold text-slate-500">Ge (Z=32)</span>
+              <span class="text-base font-extrabold block text-slate-300">Germanium</span>
+              <span class="text-[10px] mt-1 inline-block bg-slate-950 text-slate-400 px-1.5 py-0.5 rounded font-mono">Intrinsic</span>
+            </button>
+            
+            <!-- Gallium (Trivalent Acceptor) -->
+            <button onclick="selectElement('Ga')" id="btn-Ga" class="element-btn p-3 rounded-xl border border-slate-800 bg-slate-900/40 hover:bg-slate-800/20 text-slate-400 transition-all duration-200 text-left">
+              <span class="block text-xs font-bold text-slate-500">Ga (Z=31)</span>
+              <span class="text-base font-extrabold block text-slate-300">Gallium</span>
+              <span class="text-[10px] mt-1 inline-block bg-amber-950/50 text-amber-400 px-1.5 py-0.5 rounded font-mono">Trivalent (p)</span>
+            </button>
+            
+            <!-- Arsenic (Pentavalent Donor) -->
+            <button onclick="selectElement('As')" id="btn-As" class="element-btn p-3 rounded-xl border border-slate-800 bg-slate-900/40 hover:bg-slate-800/20 text-slate-400 transition-all duration-200 text-left">
+              <span class="block text-xs font-bold text-slate-500">As (Z=33)</span>
+              <span class="text-base font-extrabold block text-slate-300">Arsenic</span>
+              <span class="text-[10px] mt-1 inline-block bg-emerald-950/50 text-emerald-400 px-1.5 py-0.5 rounded font-mono">Pentavalent (n)</span>
+            </button>
+          </div>
+
+          <!-- Configuration & Shell Info Grid -->
+          <div class="border-t border-slate-800/60 pt-4">
+            <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Atomic Specifications</h3>
+            
+            <div class="space-y-3 text-sm">
+              <div class="flex justify-between items-center p-2 rounded-lg bg-slate-950/60 border border-slate-800">
+                <span class="text-slate-400">Atomic Number:</span>
+                <span id="stat-z" class="font-mono font-bold text-white">14</span>
+              </div>
+              <div class="flex justify-between items-center p-2 rounded-lg bg-slate-950/60 border border-slate-800">
+                <span class="text-slate-400">Valence Electrons:</span>
+                <span id="stat-valence" class="font-mono font-bold text-amber-400">4 Electrons</span>
+              </div>
+              <div class="flex justify-between items-center p-2 rounded-lg bg-slate-950/60 border border-slate-800">
+                <span class="text-slate-400">Electron Configuration:</span>
+                <span id="stat-config" class="font-mono font-bold text-cyan-400">2, 8, 4</span>
+              </div>
+              <div class="flex justify-between items-center p-2 rounded-lg bg-slate-950/60 border border-slate-800">
+                <span class="text-slate-400">Semiconductor Role:</span>
+                <span id="stat-role" class="font-semibold text-xs px-2 py-0.5 rounded bg-cyan-950 text-cyan-400">Base Material</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dynamic Summary Card -->
+        <div class="bg-gradient-to-br from-slate-900 to-indigo-950 border border-indigo-900/40 rounded-2xl p-5 shadow-xl">
+          <h3 class="text-sm font-extrabold text-indigo-300 uppercase tracking-wider mb-2">Educational Summary</h3>
+          <p id="element-desc" class="text-sm text-slate-300 leading-relaxed">
+            Silicon is the quintessential element of semiconductors. Having 4 valence electrons allows it to build highly stable covalent bonds with 4 neighbors in a crystal lattice structure.
+          </p>
+        </div>
+      </div>
+
+      <!-- Interactive Canvas Panel (Center/Right) -->
+      <div class="lg:col-span-8 flex flex-col gap-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-4 sm:p-6 shadow-2xl relative flex flex-col items-center">
+          
+          <!-- Interactive Top Tooltips -->
+          <div class="absolute top-4 left-4 right-4 flex justify-between items-center pointer-events-none">
+            <span class="text-[10px] sm:text-xs text-slate-500 bg-slate-950 px-2 py-1 rounded-md border border-slate-800 uppercase tracking-widest font-mono">BOHR MODEL GENERATOR</span>
+            <span class="text-[10px] sm:text-xs text-slate-400 bg-slate-950/80 px-2.5 py-1 rounded-md border border-slate-800 flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span> Interactive Hover Enabled
+            </span>
+          </div>
+
+          <!-- Canvas Container -->
+          <div class="relative w-full max-w-[500px] aspect-square flex items-center justify-center my-6">
+            <canvas id="bohr-canvas" class="w-full h-full cursor-pointer"></canvas>
+            
+            <!-- Shell Hover Info Card -->
+            <div id="shell-hover-card" class="absolute bottom-2 bg-slate-950/90 backdrop-blur-md px-4 py-2 rounded-xl border border-slate-700 text-xs text-slate-300 transition-all duration-200 opacity-0 transform translate-y-2 pointer-events-none">
+              Hover over atomic orbits to inspect electron distributions.
+            </div>
+          </div>
+
+          <!-- Play/Pause Controls & Legend -->
+          <div class="w-full border-t border-slate-800/80 pt-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-4">
+              <button onclick="toggleBohrAnimation()" id="btn-bohr-play" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-medium text-xs border border-slate-700 transition-all duration-200">
+                <span id="btn-bohr-play-icon">⏸️</span> <span id="btn-bohr-play-text">Pause Orbits</span>
+              </button>
+              <div class="flex items-center gap-2">
+                <label class="text-xs text-slate-400">Speed:</label>
+                <input type="range" id="bohr-speed-slider" min="0.1" max="2" step="0.1" value="1" oninput="adjustBohrSpeed(this.value)" class="w-24 accent-cyan-500 h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer">
+              </div>
+            </div>
+
+            <!-- Legend -->
+            <div class="flex flex-wrap items-center gap-4 justify-center">
+              <div class="flex items-center gap-1.5">
+                <span class="w-3 h-3 rounded-full bg-cyan-400 shadow-sm shadow-cyan-400/50"></span>
+                <span class="text-xs text-slate-400">Inner Shell Electrons</span>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <span class="w-3 h-3 rounded-full bg-amber-400 shadow-sm shadow-amber-400/50"></span>
+                <span class="text-xs text-slate-400">Valence Electrons</span>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <span class="w-3 h-3 rounded-full bg-indigo-600 shadow-sm shadow-indigo-600/50"></span>
+                <span class="text-xs text-slate-400">Nucleus (+)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ================= TAB 2: LATTICE DOSING SANDBOX ================= -->
+    <div id="view-lattice" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-6">
+      
+      <!-- Interactive Sandbox Area (Left/Top) -->
+      <div class="lg:col-span-8 flex flex-col gap-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-4 sm:p-6 shadow-2xl relative">
+          
+          <!-- Lattice Top Tooltips -->
+          <div class="flex justify-between items-center mb-4">
+            <div class="flex flex-col">
+              <span class="text-[10px] text-slate-500 uppercase tracking-widest font-mono">DOPING LATTICE SANDBOX</span>
+              <h3 id="lattice-heading" class="text-sm font-bold text-slate-300">Pure Silicon Intrinsic Lattice</h3>
+            </div>
+            <div class="flex items-center gap-2">
+              <button onclick="resetLatticeToPure()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs border border-slate-700 font-medium transition-all">
+                🔄 Reset to Pure Silicon
+              </button>
+            </div>
+          </div>
+
+          <!-- Canvas Interactive Grid -->
+          <div class="relative w-full aspect-[4/3] bg-slate-950/80 rounded-2xl border border-indigo-950 overflow-hidden flex items-center justify-center">
+            <canvas id="lattice-canvas" class="w-full h-full cursor-crosshair"></canvas>
+            
+            <!-- Voltage direction visual indicator -->
+            <div id="field-arrow-left" class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-700 font-mono text-xl pointer-events-none transition-all font-bold">[-V]</div>
+            <div id="field-arrow-right" class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-700 font-mono text-xl pointer-events-none transition-all font-bold">[+V]</div>
+          </div>
+
+          <!-- Live Particle Counter Display -->
+          <div class="grid grid-cols-3 gap-3 mt-4 text-center">
+            <div class="bg-slate-950 border border-slate-800 p-2.5 rounded-xl">
+              <div class="text-[10px] text-slate-500 font-bold uppercase">Free Electrons (n-type)</div>
+              <div id="counter-electrons" class="text-xl font-mono font-extrabold text-cyan-400">0</div>
+            </div>
+            <div class="bg-slate-950 border border-slate-800 p-2.5 rounded-xl">
+              <div class="text-[10px] text-slate-500 font-bold uppercase">Holes (p-type)</div>
+              <div id="counter-holes" class="text-xl font-mono font-extrabold text-amber-400">0</div>
+            </div>
+            <div class="bg-slate-950 border border-slate-800 p-2.5 rounded-xl">
+              <div class="text-[10px] text-slate-500 font-bold uppercase font-sans">Lattice Classification</div>
+              <div id="counter-type" class="text-sm mt-1 inline-block bg-cyan-950 text-cyan-400 px-3 py-0.5 rounded-lg font-bold">Intrinsic</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Control Settings & Educational Mechanics Panel (Right/Bottom) -->
+      <div class="lg:col-span-4 flex flex-col gap-4">
+        
+        <!-- Toolbox Selection -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-lg">
+          <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Doping Substitution Tool</h3>
+          <p class="text-xs text-slate-400 mb-4">Select a dopant, then click on any core in the lattice to substitute it and modify the crystal properties.</p>
+          
+          <div class="space-y-3">
+            <button onclick="setLatticeTool('Si')" id="tool-Si" class="lattice-tool-btn w-full p-3 rounded-xl border flex items-center justify-between text-left transition-all bg-indigo-950/40 border-indigo-600/60 ring-2 ring-indigo-500/20">
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full bg-cyan-600 flex items-center justify-center font-bold text-xs">+4</div>
+                <div>
+                  <span class="block font-bold text-sm text-slate-200">Pure Silicon (Si)</span>
+                  <span class="text-[10px] text-slate-400">Revert back to normal silicon node</span>
+                </div>
+              </div>
+              <span class="text-xs font-mono bg-cyan-950 text-cyan-400 px-1.5 py-0.5 rounded font-bold">4e</span>
+            </button>
+
+            <button onclick="setLatticeTool('Ga')" id="tool-Ga" class="lattice-tool-btn w-full p-3 rounded-xl border border-slate-800 bg-slate-950 hover:bg-slate-800/40 flex items-center justify-between text-left transition-all">
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full bg-amber-500 flex items-center justify-center font-bold text-xs text-slate-950">+3</div>
+                <div>
+                  <span class="block font-bold text-sm text-slate-300">Gallium (Ga) - p-Type</span>
+                  <span class="text-[10px] text-slate-400">Trivalent dopant creates a HOLE</span>
+                </div>
+              </div>
+              <span class="text-xs font-mono bg-amber-950 text-amber-400 px-1.5 py-0.5 rounded font-bold">3e</span>
+            </button>
+
+            <button onclick="setLatticeTool('As')" id="tool-As" class="lattice-tool-btn w-full p-3 rounded-xl border border-slate-800 bg-slate-950 hover:bg-slate-800/40 flex items-center justify-between text-left transition-all">
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full bg-emerald-500 flex items-center justify-center font-bold text-xs text-slate-950">+5</div>
+                <div>
+                  <span class="block font-bold text-sm text-slate-300">Arsenic (As) - n-Type</span>
+                  <span class="text-[10px] text-slate-400">Pentavalent dopant creates FREE e-</span>
+                </div>
+              </div>
+              <span class="text-xs font-mono bg-emerald-950 text-emerald-400 px-1.5 py-0.5 rounded font-bold">5e</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Simulation Physics Adjustments -->
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-lg space-y-5">
+          <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400">Physics Controls</h3>
+          
+          <!-- Slider 1: Temperature -->
+          <div>
+            <div class="flex justify-between items-center mb-1">
+              <label class="text-xs font-bold text-slate-400 flex items-center gap-1.5">
+                🔥 Thermal Temperature:
+              </label>
+              <span id="label-temp" class="text-xs font-mono font-bold text-cyan-400">300 K (Ambient)</span>
+            </div>
+            <input type="range" id="slider-temp" min="0" max="600" step="10" value="300" oninput="adjustTemperature(this.value)" class="w-full accent-cyan-500 h-1 bg-slate-850 rounded-lg appearance-none cursor-pointer">
+            <p class="text-[10px] text-slate-500 mt-1">High heat breaks covalent bonds, creating spontaneous electron-hole pairs.</p>
+          </div>
+
+          <!-- Slider 2: Electric Field Voltage -->
+          <div>
+            <div class="flex justify-between items-center mb-1">
+              <label class="text-xs font-bold text-slate-400 flex items-center gap-1.5">
+                ⚡ Applied Voltage (Electric Field):
+              </label>
+              <span id="label-voltage" class="text-xs font-mono font-bold text-amber-400">0.0 V (None)</span>
+            </div>
+            <input type="range" id="slider-voltage" min="-5" max="5" step="0.5" value="0" oninput="adjustVoltage(this.value)" class="w-full accent-amber-500 h-1 bg-slate-850 rounded-lg appearance-none cursor-pointer">
+            <p class="text-[10px] text-slate-500 mt-1">Free electrons drift to positive terminal. Holes migrate slowly to negative terminal via valence jumps.</p>
+          </div>
+        </div>
+
+        <!-- Real-Time Educational Explainer Card -->
+        <div class="bg-slate-900/60 border border-slate-850 rounded-2xl p-5 backdrop-blur-sm shadow-xl">
+          <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Substituted Atomic Physics</h3>
+          <p id="lattice-explainer" class="text-xs text-slate-300 leading-relaxed">
+            The lattice is purely intrinsic. Every Silicon atom has a net +4 core charge perfectly sharing its four electrons in stable covalent bonds with 4 neighbors. No free carriers are present except those generated by heat.
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Info Footer -->
+  <footer class="border-t border-slate-900 bg-slate-950 py-6 px-4 mt-12">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500">
+      <div class="flex items-center gap-2">
+        <span>Developed for Advanced Electronic Devices Class</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <span>© 2026 Interactive Physics Lab</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= SIMULATOR JAVASCRIPT ================= -->
+  <script>
+    // Global State
+    let activeTab = 'bohr';
+    let bohrCanvas, bohrCtx;
+    let latticeCanvas, latticeCtx;
+    let bohrAnimationId, latticeAnimationId;
+    let isBohrPlaying = true;
+    let bohrSpeedScale = 1.0;
+    
+    // Elements Bohr Database
+    const elementsData = {
+      Si: {
+        name: 'Silicon',
+        symbol: 'Si',
+        z: 14,
+        valence: 4,
+        shells: [2, 8, 4],
+        role: 'Base Intrinsic',
+        roleClass: 'bg-cyan-950 text-cyan-400 border border-cyan-800',
+        desc: 'Silicon has 14 electrons orbiting in 3 shells (2, 8, 4). As an intrinsic semiconductor, its 4 outer valence electrons build highly stable covalent bonds with adjacent Si atoms. In its pure state, it has low conductivity at low temperatures.',
+        nucleusColor: '#4f46e5'
+      },
+      Ge: {
+        name: 'Germanium',
+        symbol: 'Ge',
+        z: 32,
+        valence: 4,
+        shells: [2, 8, 18, 4],
+        role: 'Base Intrinsic',
+        roleClass: 'bg-cyan-950 text-cyan-400 border border-cyan-800',
+        desc: 'Germanium is similar to Silicon but with 32 electrons organized across 4 shells (2, 8, 18, 4). Because the 4 valence electrons are located farther from the nucleus, Germanium has a lower energy bandgap than Silicon, making it more sensitive to heat.',
+        nucleusColor: '#3b82f6'
+      },
+      Ga: {
+        name: 'Gallium',
+        symbol: 'Ga',
+        z: 31,
+        valence: 3,
+        shells: [2, 8, 18, 3],
+        role: 'Trivalent Acceptor (p-Type Doping)',
+        roleClass: 'bg-amber-950 text-amber-400 border border-amber-800',
+        desc: 'Gallium acts as a trivalent dopant with 31 total electrons (2, 8, 18, 3). When placed in a Silicon crystal lattice, it only has 3 valence electrons to share instead of 4. This creates a vacancy or "HOLE" in one of the covalent bonds, drawing in nearby electrons.',
+        nucleusColor: '#d97706'
+      },
+      As: {
+        name: 'Arsenic',
+        symbol: 'As',
+        z: 33,
+        valence: 5,
+        shells: [2, 8, 18, 5],
+        role: 'Pentavalent Donor (n-Type Doping)',
+        roleClass: 'bg-emerald-950 text-emerald-400 border border-emerald-800',
+        desc: 'Arsenic is a pentavalent dopant with 33 electrons arranged in 4 shells (2, 8, 18, 5). When bonded in the Silicon lattice, 4 of its outer electrons form complete covalent bonds. The 5th valence electron is weakly bound, instantly donating a highly mobile FREE ELECTRON.',
+        nucleusColor: '#059669'
+      }
+    };
+
+    let selectedElementKey = 'Si';
+    let hoveredShellIdx = null;
+
+    // Bohr Orbit Animation Variables
+    let bohrOrbitAngle = 0;
+
+    // Doping Lattice Sandbox State
+    let selectedLatticeTool = 'Si'; 
+    let latticeTemp = 300; // Kelvin
+    let latticeVoltage = 0.0; // Volts
+    let latticeRows = 4;
+    let latticeCols = 5;
+    let atoms = []; // 2D array of our semiconductor atoms
+    let freeElectrons = [];
+    let holes = [];
+    let lastThermalCheck = 0;
+
+    // Canvas coordinate mapping helper
+    let latticeScale = { x: 1, y: 1 };
+
+    // Initialization
+    window.onload = function() {
+      initBohrModelCanvas();
+      initLatticeCanvas();
+      
+      // Auto-trigger tab setting visual alignment
+      switchTab('bohr');
+
+      // Start global resize watcher
+      window.addEventListener('resize', () => {
+        resizeBohrCanvas();
+        resizeLatticeCanvas();
+      });
+
+      showToast("⚛️ Welcome! Dive in and select different elements to examine their orbital properties.", 4000);
+    };
+
+    // Toast System
+    function showToast(message, duration = 3000) {
+      const toast = document.getElementById('toast');
+      const msg = document.getElementById('toast-msg');
+      msg.textContent = message;
+      toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+      
+      setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+      }, duration);
+    }
+
+    // Toggle tab selector
+    function switchTab(tabId) {
+      activeTab = tabId;
+      const tabBohrBtn = document.getElementById('tab-bohr');
+      const tabLatticeBtn = document.getElementById('tab-lattice');
+      const viewBohr = document.getElementById('view-bohr');
+      const viewLattice = document.getElementById('view-lattice');
+
+      if (tabId === 'bohr') {
+        tabBohrBtn.className = "px-4 py-1.5 rounded-lg text-sm font-semibold transition-all duration-200 bg-cyan-600 text-white shadow-md";
+        tabLatticeBtn.className = "px-4 py-1.5 rounded-lg text-sm font-semibold text-slate-400 hover:text-slate-200 transition-all duration-200";
+        viewBohr.classList.remove('hidden');
+        viewLattice.classList.add('hidden');
+        
+        cancelAnimationFrame(latticeAnimationId);
+        resizeBohrCanvas();
+        animateBohrModel();
+      } else {
+        tabLatticeBtn.className = "px-4 py-1.5 rounded-lg text-sm font-semibold transition-all duration-200 bg-cyan-600 text-white shadow-md";
+        tabBohrBtn.className = "px-4 py-1.5 rounded-lg text-sm font-semibold text-slate-400 hover:text-slate-200 transition-all duration-200";
+        viewLattice.classList.remove('hidden');
+        viewBohr.classList.add('hidden');
+        
+        cancelAnimationFrame(bohrAnimationId);
+        resizeLatticeCanvas();
+        animateLattice();
+        showToast("💡 Click anywhere on the grid to change the element and dope the semiconductor!", 4000);
+      }
+    }
+
+    // ================= BOHR MODEL MODULES =================
+    function initBohrModelCanvas() {
+      bohrCanvas = document.getElementById('bohr-canvas');
+      bohrCtx = bohrCanvas.getContext('2d');
+      resizeBohrCanvas();
+
+      // Mouse interactivity for hover selection of orbital rings
+      bohrCanvas.addEventListener('mousemove', function(e) {
+        const rect = bohrCanvas.getBoundingClientRect();
+        const mouseX = e.clientX - rect.left;
+        const mouseY = e.clientY - rect.top;
+        
+        // Coordinates relative to high-density drawing canvas
+        const canvasX = mouseX * (bohrCanvas.width / rect.width);
+        const canvasY = mouseY * (bohrCanvas.height / rect.height);
+        
+        const centerX = bohrCanvas.width / 2;
+        const centerY = bohrCanvas.height / 2;
+        const dist = Math.sqrt(Math.pow(canvasX - centerX, 2) + Math.pow(canvasY - centerY, 2));
+
+        const element = elementsData[selectedElementKey];
+        const baseRadius = Math.min(bohrCanvas.width, bohrCanvas.height) * 0.1;
+        const gap = baseRadius * 0.45;
+
+        let detectedShell = null;
+        for (let i = 0; i < element.shells.length; i++) {
+          const orbitRadius = baseRadius + (i * gap);
+          if (Math.abs(dist - orbitRadius) < 15) {
+            detectedShell = i;
+            break;
+          }
+        }
+
+        if (hoveredShellIdx !== detectedShell) {
+          hoveredShellIdx = detectedShell;
+          updateShellHoverCard();
+        }
+      });
+
+      bohrCanvas.addEventListener('mouseleave', function() {
+        hoveredShellIdx = null;
+        updateShellHoverCard();
+      });
+    }
+
+    function resizeBohrCanvas() {
+      const container = bohrCanvas.parentElement;
+      const size = Math.min(container.clientWidth, 500);
+      
+      // Handle high resolution devices
+      const dpr = window.devicePixelRatio || 1;
+      bohrCanvas.width = size * dpr;
+      bohrCanvas.height = size * dpr;
+      bohrCanvas.style.width = size + 'px';
+      bohrCanvas.style.height = size + 'px';
+      
+      bohrCtx.scale(dpr, dpr);
+    }
+
+    function selectElement(key) {
+      selectedElementKey = key;
+      const element = elementsData[key];
+
+      // Update Active Buttons
+      document.querySelectorAll('.element-btn').forEach(btn => {
+        btn.className = "element-btn p-3 rounded-xl border border-slate-800 bg-slate-900/40 hover:bg-slate-800/20 text-slate-400 transition-all duration-200 text-left";
+      });
+
+      let activeColorClass = "border-cyan-500/40 text-cyan-400 ring-1 ring-cyan-500/30 bg-slate-800/40 shadow-md";
+      if (key === 'Ga') activeColorClass = "border-amber-500/40 text-amber-400 ring-1 ring-amber-500/30 bg-slate-800/40 shadow-md";
+      if (key === 'As') activeColorClass = "border-emerald-500/40 text-emerald-400 ring-1 ring-emerald-500/30 bg-slate-800/40 shadow-md";
+
+      document.getElementById(`btn-${key}`).className = `element-btn p-3 rounded-xl border transition-all duration-200 text-left ${activeColorClass}`;
+
+      // Update Data Panel Text
+      document.getElementById('stat-z').textContent = element.z;
+      document.getElementById('stat-valence').innerHTML = `<span class="text-amber-400 font-bold">${element.valence} Electrons</span>`;
+      document.getElementById('stat-config').textContent = element.shells.join(', ');
+      
+      const roleBadge = document.getElementById('stat-role');
+      roleBadge.textContent = element.role;
+      roleBadge.className = `font-semibold text-xs px-2 py-0.5 rounded ${element.roleClass}`;
+
+      document.getElementById('element-desc').textContent = element.desc;
+
+      // Pulse animation trigger on canvas switch
+      bohrOrbitAngle = 0;
+      updateShellHoverCard();
+      showToast(`Switched model to ${element.name} (${element.symbol})`);
+    }
+
+    function updateShellHoverCard() {
+      const card = document.getElementById('shell-hover-card');
+      if (hoveredShellIdx === null) {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(10px)';
+        return;
+      }
+
+      const element = elementsData[selectedElementKey];
+      const count = element.shells[hoveredShellIdx];
+      const isValence = hoveredShellIdx === element.shells.length - 1;
+      const shellNames = ['K', 'L', 'M', 'N'];
+      const currentShellName = shellNames[hoveredShellIdx] || `Shell ${hoveredShellIdx + 1}`;
+
+      card.innerHTML = `
+        <span class="font-bold text-white">${currentShellName}-Shell</span>: 
+        <span class="text-cyan-400">${count} Orbiting Electrons</span> 
+        ${isValence ? '<strong class="text-amber-400 font-bold block mt-0.5">(Outer Valence Shell)</strong>' : ''}
+      `;
+      card.style.opacity = '1';
+      card.style.transform = 'translateY(0)';
+    }
+
+    function toggleBohrAnimation() {
+      isBohrPlaying = !isBohrPlaying;
+      const btnIcon = document.getElementById('btn-bohr-play-icon');
+      const btnText = document.getElementById('btn-bohr-play-text');
+      if (isBohrPlaying) {
+        btnIcon.textContent = "⏸️";
+        btnText.textContent = "Pause Orbits";
+      } else {
+        btnIcon.textContent = "▶️";
+        btnText.textContent = "Resume Orbits";
+      }
+    }
+
+    function adjustBohrSpeed(value) {
+      bohrSpeedScale = parseFloat(value);
+    }
+
+    // High performance render loop for Bohr Shells
+    function animateBohrModel() {
+      if (activeTab !== 'bohr') return;
+
+      const size = bohrCanvas.width / (window.devicePixelRatio || 1);
+      const centerX = size / 2;
+      const centerY = size / 2;
+
+      // Clear Frame
+      bohrCtx.fillStyle = '#020617';
+      bohrCtx.fillRect(0, 0, size, size);
+
+      // Orbital parameters
+      const element = elementsData[selectedElementKey];
+      const baseRadius = size * 0.16;
+      const gap = baseRadius * 0.45;
+
+      // Increment orbit angles
+      if (isBohrPlaying) {
+        bohrOrbitAngle += 0.012 * bohrSpeedScale;
+      }
+
+      // 1. Draw Core Electron Shell Orbits
+      for (let i = 0; i < element.shells.length; i++) {
+        const orbitRadius = baseRadius + (i * gap);
+        const isHovered = (hoveredShellIdx === i);
+        const isValence = (i === element.shells.length - 1);
+
+        bohrCtx.beginPath();
+        bohrCtx.arc(centerX, centerY, orbitRadius, 0, 2 * Math.PI);
+        
+        // Highlight logic for valence or hovered shells
+        if (isHovered) {
+          bohrCtx.strokeStyle = 'rgba(234, 179, 8, 0.7)';
+          bohrCtx.lineWidth = 2.5;
+        } else if (isValence) {
+          bohrCtx.strokeStyle = 'rgba(217, 119, 6, 0.4)';
+          bohrCtx.lineWidth = 1.8;
+          // Outer glow for outer shell
+          bohrCtx.shadowColor = 'rgba(217, 119, 6, 0.2)';
+          bohrCtx.shadowBlur = 8;
+        } else {
+          bohrCtx.strokeStyle = 'rgba(30, 41, 59, 0.8)';
+          bohrCtx.lineWidth = 1;
+        }
+        bohrCtx.stroke();
+        bohrCtx.shadowBlur = 0; // reset shadow
+
+        // 2. Draw electrons on this orbit
+        const electronCount = element.shells[i];
+        for (let j = 0; j < electronCount; j++) {
+          // Stagger paths slightly depending on shell radius
+          const phaseOffset = j * ((2 * Math.PI) / electronCount);
+          const currentAngle = bohrOrbitAngle * (1.5 / (i + 1)) + phaseOffset;
+
+          const eX = centerX + orbitRadius * Math.cos(currentAngle);
+          const eY = centerY + orbitRadius * Math.sin(currentAngle);
+
+          // Draw Electron Glow Path
+          bohrCtx.beginPath();
+          bohrCtx.arc(eX, eY, isValence ? 5.5 : 4.5, 0, 2 * Math.PI);
+          
+          if (isValence) {
+            bohrCtx.fillStyle = '#f59e0b'; // Amber-500
+            bohrCtx.shadowColor = '#f59e0b';
+            bohrCtx.shadowBlur = 10;
+          } else {
+            bohrCtx.fillStyle = '#06b6d4'; // Cyan-500
+            bohrCtx.shadowColor = '#06b6d4';
+            bohrCtx.shadowBlur = 6;
+          }
+          bohrCtx.fill();
+          bohrCtx.shadowBlur = 0; // reset shadow
+          
+          // Draw crisp inner core for electrons
+          bohrCtx.beginPath();
+          bohrCtx.arc(eX, eY, 1.5, 0, 2 * Math.PI);
+          bohrCtx.fillStyle = '#ffffff';
+          bohrCtx.fill();
+        }
+      }
+
+      // 3. Draw Beautiful Central Nucleus
+      bohrCtx.beginPath();
+      const nucleusRadius = size * 0.085;
+      bohrCtx.arc(centerX, centerY, nucleusRadius, 0, 2 * Math.PI);
+      bohrCtx.fillStyle = element.nucleusColor;
+      bohrCtx.shadowColor = element.nucleusColor;
+      bohrCtx.shadowBlur = 15;
+      bohrCtx.fill();
+      bohrCtx.shadowBlur = 0;
+
+      // Inside Nucleus Text (+)
+      bohrCtx.fillStyle = '#ffffff';
+      bohrCtx.font = 'bold 18px Inter, system-ui';
+      bohrCtx.textAlign = 'center';
+      bohrCtx.textBaseline = 'middle';
+      bohrCtx.fillText('+', centerX, centerY);
+
+      // Label Element inside canvas
+      bohrCtx.fillStyle = '#64748b';
+      bohrCtx.font = 'bold 11px Fira Code, monospace';
+      bohrCtx.fillText(`${element.name} Lattice Core`, centerX, centerY + nucleusRadius + 18);
+
+      bohrAnimationId = requestAnimationFrame(animateBohrModel);
+    }
+
+
+    // ================= LATTICE SANDBOX MODULES =================
+    function initLatticeCanvas() {
+      latticeCanvas = document.getElementById('lattice-canvas');
+      latticeCtx = latticeCanvas.getContext('2d');
+      resizeLatticeCanvas();
+
+      // Clear & Build the Intrinsic Lattice Nodes
+      resetLatticeToPure();
+
+      // Setup interaction on click substitution
+      latticeCanvas.addEventListener('mousedown', handleLatticeClick);
+      latticeCanvas.addEventListener('touchstart', function(e) {
+        if(e.touches.length > 0) {
+          handleLatticeClick(e.touches[0]);
+        }
+      });
+    }
+
+    function resizeLatticeCanvas() {
+      const container = latticeCanvas.parentElement;
+      const width = container.clientWidth;
+      const height = width * 0.75; // strict 4:3 ratio to prevent distortion
+      
+      const dpr = window.devicePixelRatio || 1;
+      latticeCanvas.width = width * dpr;
+      latticeCanvas.height = height * dpr;
+      latticeCanvas.style.width = width + 'px';
+      latticeCanvas.style.height = height + 'px';
+      
+      latticeCtx.scale(dpr, dpr);
+    }
+
+    // Clear lattice structure
+    function resetLatticeToPure() {
+      atoms = [];
+      freeElectrons = [];
+      holes = [];
+
+      const sizeWidth = latticeCanvas.width / (window.devicePixelRatio || 1);
+      const sizeHeight = latticeCanvas.height / (window.devicePixelRatio || 1);
+
+      const cellW = sizeWidth / latticeCols;
+      const cellH = sizeHeight / latticeRows;
+
+      for (let r = 0; r < latticeRows; r++) {
+        atoms[r] = [];
+        for (let c = 0; c < latticeCols; c++) {
+          const x = cellW * (c + 0.5);
+          const y = cellH * (r + 0.5);
+          atoms[r][c] = {
+            r: r,
+            c: c,
+            x: x,
+            y: y,
+            type: 'Si', // starts as pure silicon
+            bonds: {
+              right: true, // true if electron pair is fully intact
+              down: true
+            }
+          };
+        }
+      }
+
+      recalculateDopants();
+      showToast("Lattice reset to Pure Intrinsic Silicon (Si)");
+    }
+
+    function setLatticeTool(tool) {
+      selectedLatticeTool = tool;
+      document.querySelectorAll('.lattice-tool-btn').forEach(btn => {
+        btn.className = "lattice-tool-btn w-full p-3 rounded-xl border border-slate-800 bg-slate-950 hover:bg-slate-800/40 flex items-center justify-between text-left transition-all";
+      });
+
+      let borderHighlight = "border-cyan-600/60 ring-2 ring-cyan-500/20 bg-indigo-950/40";
+      if (tool === 'Ga') borderHighlight = "border-amber-600/60 ring-2 ring-amber-500/20 bg-amber-950/20";
+      if (tool === 'As') borderHighlight = "border-emerald-600/60 ring-2 ring-emerald-500/20 bg-emerald-950/20";
+
+      document.getElementById(`tool-${tool}`).className = `lattice-tool-btn w-full p-3 rounded-xl border flex items-center justify-between text-left transition-all ${borderHighlight}`;
+    }
+
+    function handleLatticeClick(e) {
+      const rect = latticeCanvas.getBoundingClientRect();
+      const mouseX = e.clientX - rect.left;
+      const mouseY = e.clientY - rect.top;
+      
+      const canvasX = mouseX * (latticeCanvas.width / rect.width) / (window.devicePixelRatio || 1);
+      const canvasY = mouseY * (latticeCanvas.height / rect.height) / (window.devicePixelRatio || 1);
+
+      // Find nearest grid atom core
+      let nearestAtom = null;
+      let minDist = 40; // max threshold to register touch click
+
+      for (let r = 0; r < latticeRows; r++) {
+        for (let c = 0; c < latticeCols; c++) {
+          const atom = atoms[r][c];
+          const dist = Math.sqrt(Math.pow(canvasX - atom.x, 2) + Math.pow(canvasY - atom.y, 2));
+          if (dist < minDist) {
+            minDist = dist;
+            nearestAtom = atom;
+          }
+        }
+      }
+
+      if (nearestAtom) {
+        nearestAtom.type = selectedLatticeTool;
+        recalculateDopants();
+        
+        let toolName = "Silicon";
+        if (selectedLatticeTool === 'Ga') toolName = "Gallium (p-type Dopant)";
+        if (selectedLatticeTool === 'As') toolName = "Arsenic (n-type Dopant)";
+        showToast(`Substituted node [r:${nearestAtom.r+1}, c:${nearestAtom.c+1}] with ${toolName}`);
+      }
+    }
+
+    // Logic to count dopants, adjust covalent bonds, and spawn free electrons / holes
+    function recalculateDopants() {
+      // Clear dynamically simulated particles
+      freeElectrons = [];
+      holes = [];
+
+      let totalGa = 0;
+      let totalAs = 0;
+
+      for (let r = 0; r < latticeRows; r++) {
+        for (let c = 0; c < latticeCols; c++) {
+          const atom = atoms[r][c];
+          
+          if (atom.type === 'Ga') {
+            totalGa++;
+            // A p-type Dopant (Ga) has only 3 electrons to offer, leaving one neighboring bond vacant (creates a HOLE).
+            // Let's create an elegant, bound hole inside one of this atom's neighboring boundaries.
+            holes.push({
+              id: `hole-${r}-${c}`,
+              x: atom.x + 25,
+              y: atom.y + 10,
+              boundToR: r,
+              boundToC: c,
+              driftPhase: Math.random() * Math.PI * 2
+            });
+          } else if (atom.type === 'As') {
+            totalAs++;
+            // An n-type Dopant (As) has a 5th outer electron. Spawns an unbound, highly mobile FREE ELECTRON.
+            freeElectrons.push({
+              x: atom.x + (Math.random() * 40 - 20),
+              y: atom.y + (Math.random() * 40 - 20),
+              vx: (Math.random() - 0.5) * 1.5,
+              vy: (Math.random() - 0.5) * 1.5
+            });
+          }
+        }
+      }
+
+      // Update Live UI Displays
+      document.getElementById('counter-electrons').textContent = freeElectrons.length;
+      document.getElementById('counter-holes').textContent = holes.length;
+
+      const typeBadge = document.getElementById('counter-type');
+      const latticeHeading = document.getElementById('lattice-heading');
+      const latticeExplainer = document.getElementById('lattice-explainer');
+
+      if (totalGa === 0 && totalAs === 0) {
+        typeBadge.textContent = "Intrinsic";
+        typeBadge.className = "text-sm mt-1 inline-block bg-cyan-950 text-cyan-400 px-3 py-0.5 rounded-lg font-bold border border-cyan-800";
+        latticeHeading.textContent = "Pure Silicon Intrinsic Lattice";
+        latticeExplainer.textContent = "The lattice is purely intrinsic. Every Silicon atom has a net +4 core charge perfectly sharing its four electrons in stable covalent bonds with 4 neighbors. No free carriers are present except those generated by heat.";
+      } else if (totalGa > totalAs) {
+        typeBadge.textContent = "p-Type Semiconductor";
+        typeBadge.className = "text-sm mt-1 inline-block bg-amber-950 text-amber-400 px-3 py-0.5 rounded-lg font-bold border border-amber-800";
+        latticeHeading.textContent = `p-Type Doped Semiconductor (${totalGa} Ga dopants)`;
+        latticeExplainer.textContent = `Your lattice is predominantly p-type. Substituting Silicon cores with Gallium (+3) creates missing electron spots in covalent bonds. These 'holes' act as positive mobile charge carriers, ready to accept electrons.`;
+      } else if (totalAs > totalGa) {
+        typeBadge.textContent = "n-Type Semiconductor";
+        typeBadge.className = "text-sm mt-1 inline-block bg-emerald-950 text-emerald-400 px-3 py-0.5 rounded-lg font-bold border border-emerald-800";
+        latticeHeading.textContent = `n-Type Doped Semiconductor (${totalAs} As dopants)`;
+        latticeExplainer.textContent = `Your lattice is predominantly n-type. Substituting Silicon cores with Arsenic (+5) adds an extra valence electron. Since only 4 electrons can participate in covalent bonds, the 5th electron detaches and becomes a mobile 'free electron'.`;
+      } else {
+        typeBadge.textContent = "Compensated Material";
+        typeBadge.className = "text-sm mt-1 inline-block bg-indigo-950 text-indigo-400 px-3 py-0.5 rounded-lg font-bold border border-indigo-800";
+        latticeHeading.textContent = "Compensated Semiconductor (Balanced Doping)";
+        latticeExplainer.textContent = `An equal amount of Gallium (acceptor) and Arsenic (donor) atoms are present. The extra electrons donated by Arsenic occupy the vacant holes created by Gallium, neutralizing the major conductivity boost.`;
+      }
+    }
+
+    function adjustTemperature(val) {
+      latticeTemp = parseInt(val);
+      document.getElementById('label-temp').textContent = `${latticeTemp} K (${getTemperatureLabel(latticeTemp)})`;
+    }
+
+    function getTemperatureLabel(temp) {
+      if (temp === 0) return "Absolute Zero";
+      if (temp < 100) return "Deep Freeze";
+      if (temp < 290) return "Cold";
+      if (temp >= 290 && temp <= 310) return "Ambient Room Temp";
+      if (temp > 310 && temp < 450) return "High Operational";
+      return "Critical Overheating";
+    }
+
+    function adjustVoltage(val) {
+      latticeVoltage = parseFloat(val);
+      const voltageLabel = document.getElementById('label-voltage');
+      
+      const leftArrow = document.getElementById('field-arrow-left');
+      const rightArrow = document.getElementById('field-arrow-right');
+
+      if (latticeVoltage === 0) {
+        voltageLabel.textContent = "0.0 V (None)";
+        voltageLabel.className = "text-xs font-mono font-bold text-amber-400";
+        leftArrow.className = "absolute left-4 top-1/2 -translate-y-1/2 text-slate-800/20 font-mono text-xl pointer-events-none transition-all font-bold";
+        rightArrow.className = "absolute right-4 top-1/2 -translate-y-1/2 text-slate-800/20 font-mono text-xl pointer-events-none transition-all font-bold";
+      } else {
+        voltageLabel.textContent = `${latticeVoltage > 0 ? '+' : ''}${latticeVoltage.toFixed(1)} V`;
+        voltageLabel.className = "text-xs font-mono font-bold text-red-500 animate-pulse";
+        
+        if (latticeVoltage > 0) {
+          // Electric field directs rightwards. Electrons drift left (towards -V / left side). 
+          // Holes migrate rightwards (towards +V / right side).
+          leftArrow.className = "absolute left-4 top-1/2 -translate-y-1/2 text-cyan-500/60 font-mono text-xl pointer-events-none transition-all font-bold animate-pulse";
+          rightArrow.className = "absolute right-4 top-1/2 -translate-y-1/2 text-amber-500/60 font-mono text-xl pointer-events-none transition-all font-bold animate-pulse";
+        } else {
+          leftArrow.className = "absolute left-4 top-1/2 -translate-y-1/2 text-amber-500/60 font-mono text-xl pointer-events-none transition-all font-bold animate-pulse";
+          rightArrow.className = "absolute right-4 top-1/2 -translate-y-1/2 text-cyan-500/60 font-mono text-xl pointer-events-none transition-all font-bold animate-pulse";
+        }
+      }
+    }
+
+    // High performance render & physics simulation loop for the semiconductor crystal lattice
+    function animateLattice() {
+      if (activeTab !== 'lattice') return;
+
+      const sizeW = latticeCanvas.width / (window.devicePixelRatio || 1);
+      const sizeH = latticeCanvas.height / (window.devicePixelRatio || 1);
+
+      // Reset Frame
+      latticeCtx.fillStyle = '#090d16';
+      latticeCtx.fillRect(0, 0, sizeW, sizeH);
+
+      // --- 1. Thermal Generation Simulation ---
+      // Higher temperatures increase the chance of breaking Si-Si covalent bonds to produce electron-hole pairs
+      const now = Date.now();
+      if (now - lastThermalCheck > 500) {
+        lastThermalCheck = now;
+        const generationChance = (latticeTemp / 600) * 0.15; // scales up with temp
+        if (Math.random() < generationChance && latticeTemp > 50) {
+          // Select a random Silicon node to break a bond
+          const randR = Math.floor(Math.random() * latticeRows);
+          const randC = Math.floor(Math.random() * latticeCols);
+          const sourceAtom = atoms[randR][randC];
+
+          if (sourceAtom.type === 'Si') {
+            // Create a thermal pair!
+            freeElectrons.push({
+              x: sourceAtom.x,
+              y: sourceAtom.y,
+              vx: (Math.random() - 0.5) * 1.5,
+              vy: (Math.random() - 0.5) * 1.5,
+              isThermal: true,
+              spawnTime: now
+            });
+
+            holes.push({
+              id: `thermal-hole-${now}`,
+              x: sourceAtom.x + 20,
+              y: sourceAtom.y - 15,
+              boundToR: randR,
+              boundToC: randC,
+              driftPhase: Math.random() * Math.PI * 2,
+              isThermal: true,
+              spawnTime: now
+            });
+
+            // Update Particle Counters
+            document.getElementById('counter-electrons').textContent = freeElectrons.length;
+            document.getElementById('counter-holes').textContent = holes.length;
+          }
+        }
+      }
+
+      // Recombine old thermal pairs occasionally
+      if (Math.random() < 0.02 && freeElectrons.length > 0 && holes.length > 0) {
+        // find a thermal electron & thermal hole near each other and merge them
+        const tElecIdx = freeElectrons.findIndex(e => e.isThermal);
+        const tHoleIdx = holes.findIndex(h => h.isThermal);
+        if (tElecIdx !== -1 && tHoleIdx !== -1) {
+          freeElectrons.splice(tElecIdx, 1);
+          holes.splice(tHoleIdx, 1);
+          
+          document.getElementById('counter-electrons').textContent = freeElectrons.length;
+          document.getElementById('counter-holes').textContent = holes.length;
+        }
+      }
+
+
+      // --- 2. Draw Covalent Bonding Grid Lines ---
+      for (let r = 0; r < latticeRows; r++) {
+        for (let c = 0; c < latticeCols; c++) {
+          const atom = atoms[r][c];
+
+          // Right neighbor bond
+          if (c < latticeCols - 1) {
+            const nextAtom = atoms[r][c + 1];
+            latticeCtx.beginPath();
+            latticeCtx.moveTo(atom.x, atom.y);
+            latticeCtx.lineTo(nextAtom.x, nextAtom.y);
+            
+            // Highlight broken bonds or gallium trivalent missing bonds
+            const isGaPresent = (atom.type === 'Ga' || nextAtom.type === 'Ga');
+            if (isGaPresent) {
+              latticeCtx.strokeStyle = 'rgba(217, 119, 6, 0.25)'; // Amber (weaker bond)
+              latticeCtx.lineWidth = 1.5;
+            } else {
+              latticeCtx.strokeStyle = 'rgba(79, 70, 229, 0.45)'; // Strong covalent bond lines
+              latticeCtx.lineWidth = 3.0;
+            }
+            latticeCtx.stroke();
+
+            // Draw Shared Covalent Electron Pairs along the line
+            const midX = (atom.x + nextAtom.x) / 2;
+            const midY = (atom.y + nextAtom.y) / 2;
+
+            if (isGaPresent) {
+              // Only 1 electron is present in this covalent bond instead of 2! Show the vacant space.
+              drawBondElectrons(midX, midY, true, true); 
+            } else {
+              // Complete sharing (2 electrons)
+              drawBondElectrons(midX, midY, true, false);
+            }
+          }
+
+          // Down neighbor bond
+          if (r < latticeRows - 1) {
+            const nextAtom = atoms[r + 1][c];
+            latticeCtx.beginPath();
+            latticeCtx.moveTo(atom.x, atom.y);
+            latticeCtx.lineTo(nextAtom.x, nextAtom.y);
+            
+            const isGaPresent = (atom.type === 'Ga' || nextAtom.type === 'Ga');
+            if (isGaPresent) {
+              latticeCtx.strokeStyle = 'rgba(217, 119, 6, 0.25)';
+              latticeCtx.lineWidth = 1.5;
+            } else {
+              latticeCtx.strokeStyle = 'rgba(79, 70, 229, 0.45)';
+              latticeCtx.lineWidth = 3.0;
+            }
+            latticeCtx.stroke();
+
+            const midX = (atom.x + nextAtom.x) / 2;
+            const midY = (atom.y + nextAtom.y) / 2;
+
+            if (isGaPresent) {
+              drawBondElectrons(midX, midY, false, true);
+            } else {
+              drawBondElectrons(midX, midY, false, false);
+            }
+          }
+        }
+      }
+
+
+      // --- 3. Draw Atomic Silicon/Germanium Cores & Dopant Rings ---
+      for (let r = 0; r < latticeRows; r++) {
+        for (let c = 0; c < latticeCols; c++) {
+          const atom = atoms[r][c];
+
+          // Draw Glowing Circle for Atomic Core
+          latticeCtx.beginPath();
+          latticeCtx.arc(atom.x, atom.y, 22, 0, 2 * Math.PI);
+          
+          let fillColor = '#1e1b4b'; // deep indigo
+          let strokeColor = '#312e81';
+          let coreLabel = '+4'; // Net ionic charge
+          let labelColor = '#e2e8f0';
+
+          if (atom.type === 'Ga') {
+            fillColor = '#d97706'; // Amber-600
+            strokeColor = '#f59e0b';
+            coreLabel = '+3';
+            labelColor = '#0f172a'; // dark slate text
+          } else if (atom.type === 'As') {
+            fillColor = '#10b981'; // Emerald-500
+            strokeColor = '#34d399';
+            coreLabel = '+5';
+            labelColor = '#0f172a';
+          }
+
+          latticeCtx.fillStyle = fillColor;
+          latticeCtx.fill();
+          latticeCtx.strokeStyle = strokeColor;
+          latticeCtx.lineWidth = 2;
+          latticeCtx.stroke();
+
+          // Core Net Charge Label
+          latticeCtx.fillStyle = labelColor;
+          latticeCtx.font = 'bold 12px Inter, sans-serif';
+          latticeCtx.textAlign = 'center';
+          latticeCtx.textBaseline = 'middle';
+          latticeCtx.fillText(coreLabel, atom.x, atom.y - 1);
+
+          // Element Symbol Label beneath Core
+          latticeCtx.fillStyle = atom.type === 'Si' ? '#475569' : '#ffffff';
+          latticeCtx.font = '8px Fira Code, monospace';
+          latticeCtx.fillText(atom.type, atom.x, atom.y + 11);
+        }
+      }
+
+
+      // --- 4. Move & Render HOLES (p-Type Carriers) ---
+      // Holes migrate in the direction of the Electric Field (toward negative terminal, which is opposite to electron drift)
+      holes.forEach(hole => {
+        // Apply Electric Field Drift to Hole Position
+        // Simulated: holes migrate slowly because valence electron transfers are slower
+        const driftForce = latticeVoltage * 0.18; 
+        
+        // Random thermal jitter (increases with temp)
+        const jitter = (latticeTemp / 300) * 0.4;
+        hole.driftPhase += 0.05;
+
+        // Apply movement vector
+        hole.x += driftForce + (Math.sin(hole.driftPhase) * jitter);
+        hole.y += (Math.cos(hole.driftPhase) * jitter);
+
+        // Keep holes within their approximate lattice cell boundaries to maintain visualization realism
+        const parentAtom = atoms[hole.boundToR][hole.boundToC];
+        const dx = hole.x - parentAtom.x;
+        const dy = hole.y - parentAtom.y;
+        const limit = 32;
+
+        if (Math.abs(dx) > limit) {
+          // Jump/Shift Hole to neighboring lattice node (Simulating actual electron hopping!)
+          const stepCol = dx > 0 ? 1 : -1;
+          const nextC = Math.max(0, Math.min(latticeCols - 1, hole.boundToC + stepCol));
+          if (nextC !== hole.boundToC) {
+            hole.boundToC = nextC;
+            hole.x = atoms[hole.boundToR][nextC].x - (stepCol * 20); // shift offset smoothly
+          } else {
+            hole.x = parentAtom.x + (dx > 0 ? limit : -limit);
+          }
+        }
+        if (Math.abs(dy) > limit) {
+          const stepRow = dy > 0 ? 1 : -1;
+          const nextR = Math.max(0, Math.min(latticeRows - 1, hole.boundToR + stepRow));
+          if (nextR !== hole.boundToR) {
+            hole.boundToR = nextR;
+            hole.y = atoms[nextR][hole.boundToC].y - (stepRow * 20);
+          } else {
+            hole.y = parentAtom.y + (dy > 0 ? limit : -limit);
+          }
+        }
+
+        // Draw Hole (represented as glowing vacant amber outline rings)
+        latticeCtx.beginPath();
+        latticeCtx.arc(hole.x, hole.y, 6.5, 0, 2 * Math.PI);
+        latticeCtx.strokeStyle = '#f59e0b';
+        latticeCtx.lineWidth = 2.5;
+        latticeCtx.stroke();
+        
+        // Glow effect
+        latticeCtx.shadowColor = '#f59e0b';
+        latticeCtx.shadowBlur = 8;
+        latticeCtx.fillStyle = 'rgba(245, 158, 11, 0.1)';
+        latticeCtx.fill();
+        latticeCtx.shadowBlur = 0;
+
+        // Empty circle center symbol "h+"
+        latticeCtx.fillStyle = '#f59e0b';
+        latticeCtx.font = 'bold 8px Inter';
+        latticeCtx.fillText('h+', hole.x + 0.5, hole.y);
+      });
+
+
+      // --- 5. Move & Render FREE ELECTRONS (n-Type Mobile Carriers) ---
+      // Highly mobile, float across the entire sandbox. Accelerate toward positive terminal.
+      freeElectrons.forEach(e => {
+        // Apply Electric Field Acceleration
+        // Positive voltage is on the right (+V), attracting electrons leftward (-0.05 * V)
+        const electricAccelerationX = -0.15 * latticeVoltage;
+        e.vx += electricAccelerationX;
+
+        // Apply thermal velocity scaling (hotter = faster chaotic random walks)
+        const thermalJitter = (latticeTemp / 300) * 0.25;
+        e.vx += (Math.random() - 0.5) * thermalJitter;
+        e.vy += (Math.random() - 0.5) * thermalJitter;
+
+        // Limit speed to prevent chaotic glitching
+        const speedLimit = 3.5;
+        const currentSpeed = Math.sqrt(e.vx*e.vx + e.vy*e.vy);
+        if (currentSpeed > speedLimit) {
+          e.vx = (e.vx / currentSpeed) * speedLimit;
+          e.vy = (e.vy / currentSpeed) * speedLimit;
+        }
+
+        // Update positions
+        e.x += e.vx;
+        e.y += e.vy;
+
+        // Infinite wrap-around bounds or bounce bounds
+        if (e.x < 10) { e.x = sizeW - 10; }
+        if (e.x > sizeW - 10) { e.x = 10; }
+        if (e.y < 10) { e.y = sizeH - 10; }
+        if (e.y > sizeH - 10) { e.y = 10; }
+
+        // Render Glowing Free Electron particle
+        latticeCtx.beginPath();
+        latticeCtx.arc(e.x, e.y, 5, 0, 2 * Math.PI);
+        latticeCtx.fillStyle = '#06b6d4'; // neon cyan
+        latticeCtx.shadowColor = '#06b6d4';
+        latticeCtx.shadowBlur = 10;
+        latticeCtx.fill();
+        latticeCtx.shadowBlur = 0;
+
+        // Inner white spot
+        latticeCtx.beginPath();
+        latticeCtx.arc(e.x, e.y, 1.8, 0, 2 * Math.PI);
+        latticeCtx.fillStyle = '#ffffff';
+        latticeCtx.fill();
+      });
+
+      latticeAnimationId = requestAnimationFrame(animateLattice);
+    }
+
+    // Helper to draw shared covalent electrons in a bond
+    function drawBondElectrons(midX, midY, isHorizontal, isMissingOne) {
+      const spacing = 5; // spacing between the pair of electrons
+
+      // Determine perpendicular offset
+      const ox = isHorizontal ? 0 : spacing;
+      const oy = isHorizontal ? spacing : 0;
+
+      // Draw Electron 1
+      latticeCtx.beginPath();
+      latticeCtx.arc(midX - ox, midY - oy, 3.5, 0, 2 * Math.PI);
+      latticeCtx.fillStyle = '#06b6d4'; // bright covalent cyan
+      latticeCtx.fill();
+
+      // Draw Electron 2 (if NOT missing)
+      if (!isMissingOne) {
+        latticeCtx.beginPath();
+        latticeCtx.arc(midX + ox, midY + oy, 3.5, 0, 2 * Math.PI);
+        latticeCtx.fillStyle = '#06b6d4';
+        latticeCtx.fill();
+      } else {
+        // Draw empty dashed hole where the second electron is missing
+        latticeCtx.beginPath();
+        latticeCtx.arc(midX + ox, midY + oy, 4, 0, 2 * Math.PI);
+        latticeCtx.strokeStyle = 'rgba(245, 158, 11, 0.8)';
+        latticeCtx.lineWidth = 1;
+        latticeCtx.setLineDash([2, 1]);
+        latticeCtx.stroke();
+        latticeCtx.setLineDash([]); // clear dash state
+      }
+    }
+  </script>
+</body>
+</html>
