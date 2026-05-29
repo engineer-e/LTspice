@@ -15,7 +15,7 @@ document.getElementById("content").innerHTML =
 
 1. Semiconductor Diodes
    1. [Introduction](https://engineer-e.github.io/LTspice/electronic%20devices%20and%20circuit%20theory/edct/Semiconductor%20Diodes/Introduction/page.html)
-   2. Semiconductor Materials: Ge, Si, and GaAs
+   2. [Semiconductor Materials: Ge, Si, and GaAs](https://engineer-e.github.io/LTspice/electronic%20devices%20and%20circuit%20theory/edct/Semiconductor%20Diodes/Semiconductor%20Materials%20Ge,%20Si,%20and%20GaAs/page.html)
    3. Covalent Bonding and Intrinsic Materials
    4. Energy Levels
    5. n-Type and p-Type Materials
