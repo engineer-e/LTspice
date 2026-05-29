@@ -1,0 +1,278 @@
+Electronic Devices and Circuit Theory
+
+Semiconductor Diodes
+  Introduction
+  Semiconductor Materials: Ge, Si, and GaAs
+  Covalent Bonding and Intrinsic Materials
+  Energy Levels
+  n-Type and p-Type Materials
+  Semiconductor Diode
+  Ideal Versus Practical
+  Resistance Levels
+  Diode Equivalent Circuits
+  Transition and Diffusion Capacitance
+  Reverse Recovery Time
+  Diode Specification Sheet
+  Semiconductor Diode Notation
+  Diode Testing
+  Zener Diodes
+  Light-Emitting Diodes
+  Summary
+  Computer Analysis
+Diode Applications
+  Introduction
+  Load-Line Analysis
+  Series Diode Configurations
+  Parallel and Series-Parallel Configurations
+  AND/OR Gates
+  Sinusoidal Inputs - Halfwave Rectification
+  Full-Wave Rectification
+  Clippers
+  Clampers
+  Networks with a dc and ac source
+  Zener Diodes
+  Voltage-Multiplier Circuits
+  Practical Applications
+  Summary
+  Computer Analysis
+Bipolar Junction Transistors
+  Introduction
+  Transistor Construction
+  Transistor Operation
+  Common-Base Configuration
+  Common-Emitter Configuration
+  Common-Collector Configuration
+  Limits of Operation
+  Transistor Specification Sheet
+  Transistor Testing
+  Transistor Casing and Terminal Identification
+  Transistor Development
+  Summary
+  Computer Analysis
+DC Biasing - BJTs
+  Introduction
+  Operating Point
+  Fixed-Bias Configuration
+  Emitter-Bias Configuration
+  Voltage-Divider Bias Configuration
+  Collector Feedback Configuration
+  Emitter-Follower Configuration
+  Common-Base Configuration
+  Miscellaneous Bias Configurations
+  Summary Table
+  Design Operations
+  Multiple BJT Networks
+  Current Mirrors
+  Current Source Circuits
+  pnp Transistors
+  Transistor Switching Networks
+  Troubleshooting Techniques
+  Bias Stabilization
+  Practical Applications
+  Summary
+  Computer Analysis
+BJT AC Analysis
+  Introduction
+  Amplification in the AC Domain
+  BJT Transistor Modeling
+  The re Transistor Model
+  Common-Emitter Fixed-Bias Configuration
+  Voltage-Divider Bias
+  CE Emitter-Bias Configuration
+  Emitter-Follower Configuration
+  Common-Base Configuration
+  Collector Feedback Configuration
+  Collector DC Feedback Configuration
+  Effect of RL and Rs
+  Determining the Current Gain
+  Summary Tables
+  Two-Port Systems Approach
+  Cascaded Systems
+  Darlington Connection
+  Feedback Pair
+  The Hybrid Equivalent Model
+  Approximate Hybrid Equivalent Circuit
+  Complete Hybrid Equivalent Model
+  Hybrid pi Model
+  Variations of Transistor Parameters
+  Troubleshooting
+  Practical Applications
+  Summary
+  Computer Analysis
+Field-Effect Transistors
+  Introduction
+  Construction and Characteristics of JFETs
+  Transfer Characteristics
+  Specification Sheets (JFETs)
+  Instrumentation
+  Important Relationships
+  Depletion-Type MOSFET
+  Enhancement-Type MOSFET
+  MOSFET Handling
+  VMOS and UMOS Power and MOSFETs
+  CMOS
+  MESFETs
+  Summary Table
+  Summary
+  Computer Analysis
+FET Biasing
+  Introduction
+  Fixed-Bias Configuration
+  Self-Bias Configuration
+  Voltage-Divider Biasing
+  Common-Gate Configuration
+  Special Case VGS_Q = 0 V
+  Depletion-Type MOSFETs
+  Enhancement-Type MOSFETs
+  Summary Table
+  Combination Networks
+  Design
+  Troubleshooting
+  p-Channel FETs
+  Universal JFET Bias Curve
+  Practical Applications
+  Summary
+  Computer Analysis
+FET Amplifiers
+  Introduction
+  JFET Small-Signal Model
+  Fixed-Bias Configuration
+  Self-Bias Configuration
+  Voltage-Divider Configuration
+  Common-Gate Configuration
+  Source-Follower (Common-Drain) Configuration
+  Depletion-Type MOSFETs
+  Enhancement-Type MOSFETs
+  E-MOSFET Drain-Feedback Configuration
+  E-MOSFET Voltage-Divider Configuration
+  Designing FET Amplifier Networks
+  Summary Table
+  Effect of RL and Rσ
+  Cascade Configuration
+  Troubleshooting
+  Practical Applications
+  Summary
+  Computer Analysis
+BJT and JFET Frequency Response
+  Introduction
+  Logarithms
+  Decibels
+  General Frequency Considerations
+  Normalization Process
+  Low-Frequency Analysis-Blot Plot
+  Low-Frequency Response-BJT Amplifier with RL
+  Impact of Rs on the BJT Low-Frequency Response
+  Low-Frequency Response - FET Amplifier
+  Miller Effect Capacitance
+  High Frequency Response-BJT Amplifier
+  High Frequency Response-FET Amplifier
+  Multistage Frequency Effects
+  Square-Wave Testing
+  Summary
+  Computer Analysis
+Operational Amplifiers
+  Introduction
+  Differential Amplifier Circuit
+  BiFET, BiMOS, and CMOS Differential Amplifier Circuits
+  Op-Amp Basics
+  Practical Op-Amp Circuits
+  Op-Amp Specifications - DC Offset Parameters
+  Op-Amp Specifications - Frequency Parameters
+  Op-Amp Unit Specifications
+  Differential and Common-Mode Operation
+  Summary
+  Computer Analysis
+Op-Amp Applications
+  Constant-Gain Multiplier
+  Voltage Summing
+  Voltage Buffer
+  Controlled Sources
+  Instrumentation Circuits
+  Active Filters
+  Summary
+  Computer Analysis
+Power Amplifiers
+  Introduction-Definitions and Amplifier Types
+  Series-Fed Class A Amplifier
+  Transformer-Coupled Class A Amplifier
+  Class B Amplifier Operation
+  Class B Amplifier Circuits
+  Amplifier Distortion
+  Power Transistor Heat Sinking
+  Class C and Class D Amplifiers
+  Summary
+  Computer Analysis
+Linear-Digital ICs
+  Introduction
+  Comparator Unit Operation
+  Digital-Analog Converters
+  Timer IC Unit Operations
+  Voltage-Controlled Oscillator
+  Phase-Locked Loop
+  Interfacing Circuitry
+  Summary
+  Computer Analysis
+Feedback and Oscillator Circuits
+  Feedback Concepts
+  Feedback Connection Types
+  Practical Feedback Circuits
+  Feedback Amplifier - Phase and Frequency Considerations
+  Oscillator Operation
+  Phase-Shift Oscillator
+  Wien Bridge Oscillator
+  Tuned Oscillator Circuit
+  Crystal Oscillator
+  Unijunction Oscillator
+  Summary
+  Computer Analysis
+Power Supplies (Voltage Regulators)
+  Introduction
+  General Filter Considerations
+  Capacitor Filter
+  RC Filter
+  Discrete Transistor Voltage Regulation
+  IC Voltage Regulators
+  Practical Applications
+  Summary
+  Computer Analysis
+Other Two-Terminal Devices
+  Introduction
+  Schottky Barrier (Hot-Carrier) Diodes
+  Varactor (Varicap) Diodes
+  Solar Cells
+  Photodiodes
+  Photoconductive Cells
+  IR Emitters
+  Liquid-Crystal Displays
+  Thermistors
+  Tunnel Diodes
+  Summary
+pnpn and Other Devices
+  Introduction
+  Silicon-Controlled Rectifier
+  Basic Silicon-Controlled Rectifier Operation
+  SCR Characteristics and Ratings
+  SCR Applications
+  Silicon-Controlled Switch
+  Gate Turn-Off Switch
+  Light-Activated SCR
+  Shockley Diode
+  Diac
+  Triac
+  Unijunction Transistor
+  Phototransistors
+  Opto-Isolators
+  Programmable Unijunction Transistor
+  Summary
+Hybrid Parameters
+  Graphical Determination of the h-Parameter
+  Exact Conversion Equations
+  Approximate Conversion Equations
+Ripple Factor and Voltage Calculations
+  Ripple Factor of Rectifier
+  Ripple Voltage of Capacitor Filter
+  Relation of Vdc and Vm to Ripple r
+  Relation of Vr and Vm to Ripple r
+  Relation Connecting Conduction Angle, Percentage Ripple, and Ipeak/Idc for rectifier-capacitor filter circuits
+Charts and Table
+Solutions to Selected Odd-Numbered Problems
