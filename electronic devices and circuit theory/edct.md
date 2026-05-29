@@ -1,4 +1,13 @@
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<script>
+document.getElementById("content").innerHTML =
+  marked.parse(markdownText);
+</script>
+
+
 # Electronic Devices and Circuit Theory
+
 
 > 11th Edition ,Author of Electronics Devices and Circuit theory book are Robert L.Boylestad, Louis Nashelsky 
 
@@ -268,15 +277,19 @@
     14. Opto-Isolators
     15. Programmable Unijunction Transistor
     16. Summary
+
 A. Hybrid Parameters
-    1. Graphical Determination of the h-Parameter
-    2. Exact Conversion Equations
-    3. Approximate Conversion Equations
+   1. Graphical Determination of the h-Parameter
+   2. Exact Conversion Equations
+   3. Approximate Conversion Equations
+
 B. Ripple Factor and Voltage Calculations
-    1. Ripple Factor of Rectifier
-    2. Ripple Voltage of Capacitor Filter
-    3. Relation of $V_{dc}$ and $V_{m}$ to Ripple r
-    4. Relation of $V_{r}$ and $V_{m}$ to Ripple r
-    5. Relation Connecting Conduction Angle, Percentage Ripple, and $I_{peak}$/$I_{dc}$ for rectifier-capacitor filter circuits
+   1. Ripple Factor of Rectifier
+   2. Ripple Voltage of Capacitor Filter
+   3. Relation of $V_{dc}$ and $V_{m}$ to Ripple r
+   4. Relation of $V_{r}$ and $V_{m}$ to Ripple r
+   5. Relation Connecting Conduction Angle, Percentage Ripple, and $I_{peak}$/$I_{dc}$ for rectifier-capacitor filter circuits
+
 C. Charts and Table
+
 D. Solutions to Selected Odd-Numbered Problems
