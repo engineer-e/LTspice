@@ -17,8 +17,8 @@ document.getElementById("content").innerHTML =
    1. [Introduction](https://engineer-e.github.io/LTspice/electronic%20devices%20and%20circuit%20theory/edct/Semiconductor%20Diodes/Introduction/page.html)
    2. [Semiconductor Materials: Ge, Si, and GaAs](https://engineer-e.github.io/LTspice/electronic%20devices%20and%20circuit%20theory/edct/Semiconductor%20Diodes/Semiconductor%20Materials%20Ge,%20Si,%20and%20GaAs/page.html)
    3. [Covalent Bonding and Intrinsic Materials](https://engineer-e.github.io/LTspice/electronic%20devices%20and%20circuit%20theory/edct/Semiconductor%20Diodes/Covalent%20Bonding%20and%20Intrinsic%20Materials/page.html)
-   4. Energy Levels
-   5. n-Type and p-Type Materials
+   4. [Energy Levels](https://engineer-e.github.io/LTspice/electronic%20devices%20and%20circuit%20theory/edct/Semiconductor%20Diodes/Energy%20Levels/page.html)
+   5. [n-Type and p-Type Materials](https://engineer-e.github.io/LTspice/electronic%20devices%20and%20circuit%20theory/edct/Semiconductor%20Diodes/n-Type%20and%20p-Type%20Materials/page.html)
    6. Semiconductor Diode
    7. Ideal Versus Practical
    8. Resistance Levels     
