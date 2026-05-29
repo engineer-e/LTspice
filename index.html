@@ -177,9 +177,11 @@
 
             const baseUrl = "https://raw.githubusercontent.com/engineer-e/Childhood-Memory/main/childhood_memory/glb/model/";
 
+            const baseUrl1 = "https://raw.githubusercontent.com/engineer-e/LTspice/main/electronic devices and circuit theory/design/";
+
             try {
                 const [envResult, charResult] = await Promise.all([
-                    BABYLON.SceneLoader.ImportMeshAsync("", baseUrl, "gobalkrishnan_childhood.glb", scene),
+                    BABYLON.SceneLoader.ImportMeshAsync("", baseUrl1, "edct_mind_palace.glb", scene),
                     BABYLON.SceneLoader.ImportMeshAsync("", baseUrl, "w2green.glb", scene)
                 ]);
 
