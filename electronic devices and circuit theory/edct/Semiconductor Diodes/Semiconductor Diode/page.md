@@ -7,12 +7,14 @@
 |  ![](No%20Applied%20Bias%20(V%20=%200V)/2.jpeg) |
 |  ![](No%20Applied%20Bias%20(V%20=%200V)/3.jpeg) |
 |  ![](No%20Applied%20Bias%20(V%20=%200V)/4.jpeg) |
+| ![](../../Figure/Fig%201.12%20A%20p-n%20junction%20with%20no%20external%20bias.jpeg) |
 |  ![](No%20Applied%20Bias%20(V%20=%200V)/5.jpeg) |
 |  ![](No%20Applied%20Bias%20(V%20=%200V)/6.jpeg) |
 |  ![](No%20Applied%20Bias%20(V%20=%200V)/7.jpeg) |
 |  ![](No%20Applied%20Bias%20(V%20=%200V)/8.jpeg) |
 | **Reverse-Bias Condition ($V_D$ < 0 V)** |
 | ![](Reverse-Bias%20Condition%20(V_D%20less%20than%200%20V)/1a.jpeg) |
+|![](../../Figure/Fig%201.13%20Reverse-biased%20p-n%20junction.jpeg) |
 | ![](Reverse-Bias%20Condition%20(V_D%20less%20than%200%20V)/1b.jpeg) |
 | ![](Reverse-Bias%20Condition%20(V_D%20less%20than%200%20V)/2.jpeg) |
 | ![](Reverse-Bias%20Condition%20(V_D%20less%20than%200%20V)/3.jpeg) |
@@ -20,13 +22,17 @@
 | **Forward-Bias Condition ($V_D$ > 0 V)** |
 | ![](Forward-Bias%20Condition%20(V_D%20greater%20than%200%20V)/1.jpeg) |
 | ![](Forward-Bias%20Condition%20(V_D%20greater%20than%200%20V)/2a.jpeg) |
+| ![](../../Figure/Fig%201.14%20Forward-biased%20p-n%20junction.jpeg) |
 | ![](Forward-Bias%20Condition%20(V_D%20greater%20than%200%20V)/2b.jpeg) |
 | ![](Forward-Bias%20Condition%20(V_D%20greater%20than%200%20V)/3.jpeg) |
 | ![](Forward-Bias%20Condition%20(V_D%20greater%20than%200%20V)/4.jpeg) |
+| ![](../Example/example%201.1.jpeg)|
 | ![](Forward-Bias%20Condition%20(V_D%20greater%20than%200%20V)/5.jpeg) |
 | ![](Forward-Bias%20Condition%20(V_D%20greater%20than%200%20V)/6.jpeg) |
 | ![](Forward-Bias%20Condition%20(V_D%20greater%20than%200%20V)/7.jpeg) |
+| ![](../../Figure/Fig%201.15%20Silicon%20semiconductor%20diode%20characteristics.png) |
 | ![](Forward-Bias%20Condition%20(V_D%20greater%20than%200%20V)/8.jpeg) |
+| ![](../../Figure/Fig%201.16%20Plot%20of%20e^x.jpeg) |
 | ![](Forward-Bias%20Condition%20(V_D%20greater%20than%200%20V)/9.jpeg) |
 | ![](Forward-Bias%20Condition%20(V_D%20greater%20than%200%20V)/10.jpeg) |
 | ![](Forward-Bias%20Condition%20(V_D%20greater%20than%200%20V)/11.jpeg) |
@@ -43,6 +49,7 @@
 | ![](Forward-Bias%20Condition%20(V_D%20greater%20than%200%20V)/22.jpeg) |
 | **Breakdown Region** |
 | ![](Breakdown%20Region/1.jpeg) |
+| ![](../../Figure/Fig%201.17%20Breakdown%20region.jpeg) |
 | ![](Breakdown%20Region/2.jpeg) |
 | ![](Breakdown%20Region/3.jpeg) |
 | ![](Breakdown%20Region/4.jpeg) |
