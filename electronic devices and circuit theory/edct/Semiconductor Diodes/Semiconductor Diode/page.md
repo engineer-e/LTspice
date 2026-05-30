@@ -52,12 +52,14 @@
 | ![](Breakdown%20Region/8.jpeg) |
 | **Ge, Si and GaAs** |
 | ![](Ge,%20Si%20and%20GaAs/1a.jpeg) |
+| ![](../../Figure/Fig%201.18%20Comparison%20of%20Ge,%20Si,%20and%20GaAs%20commercial%20diodes.jpeg) |
 | ![](Ge,%20Si%20and%20GaAs/1b.jpeg) |
+| ![](../../Table/Table%201.3.jpeg) |
 | ![](Ge,%20Si%20and%20GaAs/2.jpeg) |
 | ![](Ge,%20Si%20and%20GaAs/3.jpeg) |
 | ![](Ge,%20Si%20and%20GaAs/4.jpeg) |
-| ![](../Example/example%201.2.jpeg) |
 | ![](../../Table/Table%201.4.jpeg) |
+| ![](../Example/example%201.2.jpeg) |
 | **Temperature Effects** |
 | ![](Temperature%20Effects/1.jpeg) |
 | ![](../../Figure/Fig%201.19%20Variation%20in%20Si%20diode%20characteristics%20with%20temperature%20change..jpeg) |
@@ -67,11 +69,8 @@
 | ![](Temperature%20Effects/5.jpeg) |
 | ![](Temperature%20Effects/6.jpeg) |
 | ![](Temperature%20Effects/7.jpeg) |
-
-# **Summary** 
-
+| **Summary** |
 | ![](Summary/1.jpeg) |
-| :---: |
 | ![](Summary/2.jpeg) |
 | ![](../../Table/Table%201.5.jpeg) |
 | ![](../../Figure/Fig%201.20.png) |
