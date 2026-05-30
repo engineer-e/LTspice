@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Diode IV Simulator</title>
+<script src="https://cdn.jsdelivr.net/npm/lil-gui@0.20"></script>
+<style>
+body{margin:0;background:#0f172a;color:#fff;font-family:Arial}
+canvas{display:block;width:100vw;height:100vh}
+#hud{position:fixed;top:10px;right:10px;background:#111827;padding:8px;border:1px solid #334155}
+</style>
+</head>
+<body>
+<div id="hud">Vd=-- V<br>Id=--</div>
+<canvas id="c"></canvas>
+<script>
+const c=document.getElementById("c");
+const ctx=c.getContext("2d");
+const hud=document.getElementById("hud");
+
+const p={Is:1e-11,n:1.5,Rb:5,temp:25};
+
+const gui=new lil.GUI();
+gui.add(p,"Is",1e-13,1e-8);
+gui.add(p,"n",1,2,0.01);
+gui.add(p,"Rb",0,25,0.1);
+gui.add(p,"temp",-75,125,1);
+
+function resize(){
+ c.width=innerWidth*devicePixelRatio;
+ c.height=innerHeight*devicePixelRatio;
+}
+resize();
+addEventListener("resize",resize);
+
+const k=1.380649e-23,q=1.60217663e-19;
+
+function diodeReal(Vapp){
+ const T=p.temp+273.15;
+ const Vt=k*T/q;
+ let Vd=Vapp;
+ for(let i=0;i<25;i++){
+   let I=p.Is*(Math.exp(Vd/(p.n*Vt))-1);
+   let f=Vd+I*p.Rb-Vapp;
+   let df=1+(p.Is/(p.n*Vt))*Math.exp(Vd/(p.n*Vt))*p.Rb;
+   Vd-=f/df;
+ }
+ return p.Is*(Math.exp(Vd/(p.n*Vt))-1);
+}
+
+function diodeIdeal(V){
+ const T=p.temp+273.15;
+ const Vt=k*T/q;
+ return p.Is*(Math.exp(V/(p.n*Vt))-1);
+}
+
+function xMap(v,w){return ((v+1)/2.2)*w;}
+function xInv(x,w){return -1+(x/w)*2.2;}
+
+function yMap(mA,h){
+ const split=h*0.7;
+ if(mA>=0) return split-(Math.min(mA,25)/25)*split;
+ let pA=Math.abs(mA*1e9);
+ return split+(Math.min(pA,50)/50)*(h-split);
+}
+
+let mx=null;
+c.addEventListener("mousemove",e=>{
+ const r=c.getBoundingClientRect();
+ mx=(e.clientX-r.left)*(c.width/r.width);
+});
+c.addEventListener("mouseleave",()=>mx=null);
+
+function draw(){
+ requestAnimationFrame(draw);
+
+ const w=c.width,h=c.height;
+ const split=h*0.7;
+
+ ctx.fillStyle="#0f172a";
+ ctx.fillRect(0,0,w,h);
+
+ ctx.strokeStyle="#1e293b";
+ for(let i=0;i<=10;i++){
+   let x=i*w/10;
+   ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke();
+ }
+ for(let i=0;i<=10;i++){
+   let y=i*h/10;
+   ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke();
+ }
+
+ const x0=xMap(0,w);
+
+ ctx.strokeStyle="#ffffff";
+ ctx.lineWidth=2;
+
+ ctx.beginPath();
+ ctx.moveTo(x0,0);
+ ctx.lineTo(x0,h);
+ ctx.stroke();
+
+ ctx.beginPath();
+ ctx.moveTo(0,split);
+ ctx.lineTo(w,split);
+ ctx.stroke();
+
+ ctx.fillStyle="#ffffff";
+ ctx.font="18px Arial";
+
+ [-1,-0.5,0,0.3,0.5,0.7,1.0,1.2].forEach(v=>{
+   const x=xMap(v,w);
+   ctx.fillText(v+"V",x-20,split+30);
+ });
+
+ [5,10,15,20,25].forEach(v=>{
+   ctx.fillText(v+"mA",10,yMap(v,h));
+ });
+
+ [10,20,30,40,50].forEach(v=>{
+   ctx.fillText("-"+v+"pA",10,split+(v/50)*(h-split));
+ });
+
+ ctx.fillText("Forward Current",20,30);
+ ctx.fillText("Reverse Leakage",20,split+60);
+ ctx.fillText("Voltage Vd",w/2-60,h-20);
+
+ ctx.setLineDash([8,4]);
+ ctx.strokeStyle="#94a3b8";
+ ctx.beginPath();
+ for(let px=0;px<w;px++){
+   let V=xInv(px,w);
+   let y=yMap(diodeIdeal(V)*1000,h);
+   if(px===0)ctx.moveTo(px,y); else ctx.lineTo(px,y);
+ }
+ ctx.stroke();
+
+ ctx.setLineDash([]);
+ ctx.strokeStyle="#22d3ee";
+ ctx.lineWidth=3;
+ ctx.beginPath();
+ for(let px=0;px<w;px++){
+   let V=xInv(px,w);
+   let y=yMap(diodeReal(V)*1000,h);
+   if(px===0)ctx.moveTo(px,y); else ctx.lineTo(px,y);
+ }
+ ctx.stroke();
+
+ if(mx!==null){
+   const V=xInv(mx,w);
+   const I=diodeReal(V)*1000;
+   const y=yMap(I,h);
+
+   ctx.strokeStyle="#10b981";
+   ctx.beginPath();ctx.moveTo(mx,0);ctx.lineTo(mx,h);ctx.stroke();
+
+   ctx.fillStyle="#10b981";
+   ctx.beginPath();ctx.arc(mx,y,6,0,Math.PI*2);ctx.fill();
+
+   hud.innerHTML=`Vd=${V.toFixed(3)} V<br>Id=${I.toExponential(3)} mA`;
+ }
+}
+draw();
+</script>
+</body>
+</html>

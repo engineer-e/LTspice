@@ -30,7 +30,9 @@
 | ![](Forward-Bias%20Condition%20(V_D%20greater%20than%200%20V)/5.jpeg) |
 | ![](Forward-Bias%20Condition%20(V_D%20greater%20than%200%20V)/6.jpeg) |
 | ![](Forward-Bias%20Condition%20(V_D%20greater%20than%200%20V)/7.jpeg) |
-| ![](../../Figure/Fig%201.15%20Silicon%20semiconductor%20diode%20characteristics.png) |
+| **Note** : used Chatgpt , Google Gemini, Deepseek for this code |
+|[Python Code for Fig 1.15](../../Code/Python/Fig_1_15.py), [Html Code for Fig 1.15](../../Code/Graph/fig_1_15.html)|
+| [![](../../Figure/Fig%201.15%20Silicon%20semiconductor%20diode%20characteristics.png)](../../Code/Graph/fig_1_15.html) |
 | ![](Forward-Bias%20Condition%20(V_D%20greater%20than%200%20V)/8.jpeg) |
 | ![](../../Figure/Fig%201.16%20Plot%20of%20e^x.jpeg) |
 | ![](Forward-Bias%20Condition%20(V_D%20greater%20than%200%20V)/9.jpeg) |
