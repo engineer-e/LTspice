@@ -67,7 +67,7 @@
 | ![](Temperature%20Effects/5.jpeg) |
 | ![](Temperature%20Effects/6.jpeg) |
 | ![](Temperature%20Effects/7.jpeg) |
-| <h1>**Summary** |
+| <h1>**Summary**</h1> |
 | ![](Summary/1.jpeg) |
 | ![](Summary/2.jpeg) |
 | ![](../../Table/Table%201.5.jpeg) |
