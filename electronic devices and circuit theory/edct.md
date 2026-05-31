@@ -20,8 +20,8 @@ document.getElementById("content").innerHTML =
    4. [Energy Levels](https://engineer-e.github.io/LTspice/electronic%20devices%20and%20circuit%20theory/edct/Semiconductor%20Diodes/Energy%20Levels/page.html)
    5. [n-Type and p-Type Materials](https://engineer-e.github.io/LTspice/electronic%20devices%20and%20circuit%20theory/edct/Semiconductor%20Diodes/n-Type%20and%20p-Type%20Materials/page.html)
    6. [Semiconductor Diode](https://engineer-e.github.io/LTspice/electronic%20devices%20and%20circuit%20theory/edct/Semiconductor%20Diodes/Semiconductor%20Diode/page.html)
-   7. Ideal Versus Practical
-   8. Resistance Levels     
+   7. [Ideal Versus Practical](https://engineer-e.github.io/LTspice/electronic%20devices%20and%20circuit%20theory/edct/Semiconductor%20Diodes/Ideal%20Versus%20Practical/page.html)
+   8. [Resistance Levels](https://engineer-e.github.io/LTspice/electronic%20devices%20and%20circuit%20theory/edct/Semiconductor%20Diodes/Resistance%20Levels/page.html)     
    9. Diode Equivalent Circuits
    10. Transition and Diffusion Capacitance
    11. Reverse Recovery Time
